@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".2" />
+        app:layout_constraintGuide_percent="0.37" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.57" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -132,7 +132,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/result_text_layout"
+        android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -143,9 +143,10 @@
         app:layout_constraintTop_toTopOf="@+id/amount_text_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_result"
+            android:id="@+id/et_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
