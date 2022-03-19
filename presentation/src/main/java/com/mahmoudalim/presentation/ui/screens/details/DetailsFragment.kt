@@ -1,4 +1,4 @@
-package com.mahmoudalim.presentation.ui.screens
+package com.mahmoudalim.presentation.ui.screens.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mahmoudalim.presentation.R
 
-class ConverterFragment : Fragment() {
+class DetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +18,6 @@ class ConverterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_converter, container, false)
+        return inflater.inflate(R.layout.fragment_details, container, false)
     }
 }

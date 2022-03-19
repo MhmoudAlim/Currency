@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/converterFragment"
-        android:name="com.mahmoudalim.presentation.ui.screens.ConverterFragment"
+        android:name="com.mahmoudalim.presentation.ui.screens.converter.ConverterFragment"
         android:label="ConverterFragment"
         tools:layout="@layout/fragment_converter">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.mahmoudalim.presentation.ui.screens.DetailsFragment"
+        android:name="com.mahmoudalim.presentation.ui.screens.details.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details" />
 </navigation>
