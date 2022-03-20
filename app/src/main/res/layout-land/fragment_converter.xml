@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.screens.converter.ConverterFragment">
+    tools:context="com.mahmoudalim.currency.screens.converter.ConverterFragment">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -62,7 +62,7 @@
         android:entries="@array/currency_codes"
         android:padding="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/spToCurrency"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/btn_swap"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/tvFrom" />
 
@@ -82,11 +82,11 @@
         android:padding="14dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/btn_swap"
         app:layout_constraintTop_toBottomOf="@+id/tvTo" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_swap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_popup_sync"
@@ -132,7 +132,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/result_text_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -143,10 +143,11 @@
         app:layout_constraintTop_toTopOf="@+id/amount_text_layout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_value"
+            android:id="@+id/et_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:editable="false"
+            android:inputType="none"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 

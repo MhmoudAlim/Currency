@@ -5,5 +5,4 @@ object Modules {
     const val app = ":app"
     const val core = ":core"
     const val data = ":data"
-    const val presentation = ":presentation"
 }
