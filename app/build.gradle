@@ -41,7 +41,6 @@ android {
 
 dependencies {
     implementation project(Modules.core)
-    implementation project(Modules.presentation)
     implementation project(Modules.data)
 
     implementation AndroidX.coreKtx
@@ -52,6 +51,13 @@ dependencies {
 
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
+    kapt DaggerHilt.hiltAndroidCompiler
+
+    implementation Google.gson
+    implementation Retrofit.retrofit
+    implementation Retrofit.gsonConverter
+    implementation Retrofit.okHttp
+    implementation Retrofit.okHttpLoggingInterceptor
 
     testImplementation Testing.junit4
     androidTestImplementation Testing.junitAndroidExt
