@@ -1,0 +1,121 @@
+package com.mahmoudalim.data.utils
+
+import com.mahmoudalim.data.models.Ratings
+
+/**
+ * Created by Mahmoud Alim on 19/03/2022.
+ */
+object RateFromCurrency {
+
+    operator fun invoke(Currency: String, rateS: Ratings): Double? = when (Currency) {
+        "AED" -> rateS.AED
+        "AFN" -> rateS.AFN
+        "ALL" -> rateS.ALL
+        "AMD" -> rateS.AMD
+        "ANG" -> rateS.ANG
+        "AOA" -> rateS.AOA
+        "ARS" -> rateS.ARS
+        "AUD" -> rateS.AUD
+        "AWG" -> rateS.AWG
+        "AZN" -> rateS.AZN
+        "BAM" -> rateS.BAM
+        "BBD" -> rateS.BBD
+        "BDT" -> rateS.BDT
+        "BGN" -> rateS.BGN
+        "BHD" -> rateS.BHD
+        "BIF" -> rateS.BIF
+        "BMD" -> rateS.BMD
+        "BND" -> rateS.BND
+        "BOB" -> rateS.BOB
+        "BRL" -> rateS.BRL
+        "BSD" -> rateS.BSD
+        "BTC" -> rateS.BTC
+        "BTN" -> rateS.BTN
+        "BWP" -> rateS.BWP
+        "BYN" -> rateS.BYN
+        "BYR" -> rateS.BYR
+        "BZD" -> rateS.BZD
+        "CAD" -> rateS.CAD
+        "CDF" -> rateS.CDF
+        "CHF" -> rateS.CHF
+        "CLF" -> rateS.CLF
+        "CLP" -> rateS.CLP
+        "CNY" -> rateS.CNY
+        "COP" -> rateS.COP
+        "CRC" -> rateS.CRC
+        "CUC" -> rateS.CUC
+        "CUP" -> rateS.CUP
+        "CVE" -> rateS.CVE
+        "CZK" -> rateS.CZK
+        "DJF" -> rateS.DJF
+        "DKK" -> rateS.DKK
+        "DOP" -> rateS.DOP
+        "DZD" -> rateS.DZD
+        "EGP" -> rateS.EGP
+        "ERN" -> rateS.ERN
+        "ETB" -> rateS.ETB
+        "EUR" -> rateS.EUR
+        "FJD" -> rateS.FJD
+        "FKP" -> rateS.FKP
+        "GBP" -> rateS.GBP
+        "GEL" -> rateS.GEL
+        "GGP" -> rateS.GGP
+        "GHS" -> rateS.GHS
+        "GIP" -> rateS.GIP
+        "GMD" -> rateS.GMD
+        "GNF" -> rateS.GNF
+        "GTQ" -> rateS.GTQ
+        "GYD" -> rateS.GYD
+        "HKD" -> rateS.HKD
+        "HNL" -> rateS.HNL
+        "JPY" -> rateS.JPY
+        "KES" -> rateS.KES
+        "KGS" -> rateS.KGS
+        "KHR" -> rateS.KHR
+        "KMF" -> rateS.KMF
+        "KPW" -> rateS.KPW
+        "LSL" -> rateS.LSL
+        "LTL" -> rateS.LTL
+        "LVL" -> rateS.LVL
+        "MGA" -> rateS.MGA
+        "MKD" -> rateS.MKD
+        "MMK" -> rateS.MMK
+        "PAB" -> rateS.PAB
+        "PEN" -> rateS.PEN
+        "PHP" -> rateS.PHP
+        "PKR" -> rateS.PKR
+        "PYG" -> rateS.PYG
+        "QAR" -> rateS.QAR
+        "SAR" -> rateS.SAR
+        "SBD" -> rateS.SBD
+        "SCR" -> rateS.SCR
+        "SDG" -> rateS.SDG
+        "SEK" -> rateS.SEK
+        "SGD" -> rateS.SGD
+        "SHP" -> rateS.SHP
+        "SLL" -> rateS.SLL
+        "SOS" -> rateS.SOS
+        "SRD" -> rateS.SRD
+        "STD" -> rateS.STD
+        "USD" -> rateS.USD
+        "UYU" -> rateS.UYU
+        "UZS" -> rateS.UZS
+        "VEF" -> rateS.VEF
+        "VND" -> rateS.VND
+        "VUV" -> rateS.VUV
+        "WST" -> rateS.WST
+        "XAF" -> rateS.XAF
+        "XAG" -> rateS.XAG
+        "XAU" -> rateS.XAU
+        "XCD" -> rateS.XCD
+        "XDR" -> rateS.XDR
+        "XOF" -> rateS.XOF
+        "XPF" -> rateS.XPF
+        "YER" -> rateS.YER
+        "ZAR" -> rateS.ZAR
+        "ZMK" -> rateS.ZMK
+        "ZMW" -> rateS.ZMW
+        "ZWL" -> rateS.ZWL
+        else -> null
+    }
+}
