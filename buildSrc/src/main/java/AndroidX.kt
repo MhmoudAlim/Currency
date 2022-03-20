@@ -15,5 +15,8 @@ object AndroidX {
     const val fragmentNavigation =  "androidx.navigation:navigation-fragment-ktx:$nav_version"
     const val uiNavigation =  "androidx.navigation:navigation-ui-ktx:$nav_version"
     const val safeArgs =  "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    const val lifeCycle =  "androidx.lifecycle:lifecycle-viewmodel-ktx:$nav_version"
+
+
 
 }
