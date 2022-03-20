@@ -2,342 +2,343 @@ package com.mahmoudalim.data.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Rates(
     @SerializedName("AED")
-    val aED: Double,
+    val aED: Double? = null,
     @SerializedName("AFN")
-    val aFN: Double,
+    val aFN: Double? = null,
     @SerializedName("ALL")
-    val aLL: Double,
+    val aLL: Double? = null,
     @SerializedName("AMD")
-    val aMD: Double,
+    val aMD: Double? = null,
     @SerializedName("ANG")
-    val aNG: Double,
+    val aNG: Double? = null,
     @SerializedName("AOA")
-    val aOA: Double,
+    val aOA: Double? = null,
     @SerializedName("ARS")
-    val aRS: Double,
+    val aRS: Double? = null,
     @SerializedName("AUD")
-    val aUD: Double,
+    val aUD: Double? = null,
     @SerializedName("AWG")
-    val aWG: Double,
+    val aWG: Double? = null,
     @SerializedName("AZN")
-    val aZN: Double,
+    val aZN: Double? = null,
     @SerializedName("BAM")
-    val bAM: Double,
+    val bAM: Double? = null,
     @SerializedName("BBD")
-    val bBD: Double,
+    val bBD: Double? = null,
     @SerializedName("BDT")
-    val bDT: Double,
+    val bDT: Double? = null,
     @SerializedName("BGN")
-    val bGN: Double,
+    val bGN: Double? = null,
     @SerializedName("BHD")
-    val bHD: Double,
+    val bHD: Double? = null,
     @SerializedName("BIF")
-    val bIF: Double,
+    val bIF: Double? = null,
     @SerializedName("BMD")
-    val bMD: Double,
+    val bMD: Double? = null,
     @SerializedName("BND")
-    val bND: Double,
+    val bND: Double? = null,
     @SerializedName("BOB")
-    val bOB: Double,
+    val bOB: Double? = null,
     @SerializedName("BRL")
-    val bRL: Double,
+    val bRL: Double? = null,
     @SerializedName("BSD")
-    val bSD: Double,
+    val bSD: Double? = null,
     @SerializedName("BTC")
-    val bTC: Double,
+    val bTC: Double? = null,
     @SerializedName("BTN")
-    val bTN: Double,
+    val bTN: Double? = null,
     @SerializedName("BWP")
-    val bWP: Double,
+    val bWP: Double? = null,
     @SerializedName("BYN")
-    val bYN: Double,
+    val bYN: Double? = null,
     @SerializedName("BYR")
-    val bYR: Double,
+    val bYR: Double? = null,
     @SerializedName("BZD")
-    val bZD: Double,
+    val bZD: Double? = null,
     @SerializedName("CAD")
-    val cAD: Double,
+    val cAD: Double? = null,
     @SerializedName("CDF")
-    val cDF: Double,
+    val cDF: Double? = null,
     @SerializedName("CHF")
-    val cHF: Double,
+    val cHF: Double? = null,
     @SerializedName("CLF")
-    val cLF: Double,
+    val cLF: Double? = null,
     @SerializedName("CLP")
-    val cLP: Double,
+    val cLP: Double? = null,
     @SerializedName("CNY")
-    val cNY: Double,
+    val cNY: Double? = null,
     @SerializedName("COP")
-    val cOP: Double,
+    val cOP: Double? = null,
     @SerializedName("CRC")
-    val cRC: Double,
+    val cRC: Double? = null,
     @SerializedName("CUC")
-    val cUC: Double,
+    val cUC: Double? = null,
     @SerializedName("CUP")
-    val cUP: Double,
+    val cUP: Double? = null,
     @SerializedName("CVE")
-    val cVE: Double,
+    val cVE: Double? = null,
     @SerializedName("CZK")
-    val cZK: Double,
+    val cZK: Double? = null,
     @SerializedName("DJF")
-    val dJF: Double,
+    val dJF: Double? = null,
     @SerializedName("DKK")
-    val dKK: Double,
+    val dKK: Double? = null,
     @SerializedName("DOP")
-    val dOP: Double,
+    val dOP: Double? = null,
     @SerializedName("DZD")
-    val dZD: Double,
+    val dZD: Double? = null,
     @SerializedName("EGP")
-    val eGP: Double,
+    val eGP: Double? = null,
     @SerializedName("ERN")
-    val eRN: Double,
+    val eRN: Double? = null,
     @SerializedName("ETB")
-    val eTB: Double,
+    val eTB: Double? = null,
     @SerializedName("EUR")
-    val eUR: Int,
+    val eUR: Double? = null,
     @SerializedName("FJD")
-    val fJD: Double,
+    val fJD: Double? = null,
     @SerializedName("FKP")
-    val fKP: Double,
+    val fKP: Double? = null,
     @SerializedName("GBP")
-    val gBP: Double,
+    val gBP: Double? = null,
     @SerializedName("GEL")
-    val gEL: Double,
+    val gEL: Double? = null,
     @SerializedName("GGP")
-    val gGP: Double,
+    val gGP: Double? = null,
     @SerializedName("GHS")
-    val gHS: Double,
+    val gHS: Double? = null,
     @SerializedName("GIP")
-    val gIP: Double,
+    val gIP: Double? = null,
     @SerializedName("GMD")
-    val gMD: Double,
+    val gMD: Double? = null,
     @SerializedName("GNF")
-    val gNF: Double,
+    val gNF: Double? = null,
     @SerializedName("GTQ")
-    val gTQ: Double,
+    val gTQ: Double? = null,
     @SerializedName("GYD")
-    val gYD: Double,
+    val gYD: Double? = null,
     @SerializedName("HKD")
-    val hKD: Double,
+    val hKD: Double? = null,
     @SerializedName("HNL")
-    val hNL: Double,
+    val hNL: Double? = null,
     @SerializedName("HRK")
-    val hRK: Double,
+    val hRK: Double? = null,
     @SerializedName("HTG")
-    val hTG: Double,
+    val hTG: Double? = null,
     @SerializedName("HUF")
-    val hUF: Double,
+    val hUF: Double? = null,
     @SerializedName("IDR")
-    val iDR: Double,
+    val iDR: Double? = null,
     @SerializedName("ILS")
-    val iLS: Double,
+    val iLS: Double? = null,
     @SerializedName("IMP")
-    val iMP: Double,
+    val iMP: Double? = null,
     @SerializedName("INR")
-    val iNR: Double,
+    val iNR: Double? = null,
     @SerializedName("IQD")
-    val iQD: Double,
+    val iQD: Double? = null,
     @SerializedName("IRR")
-    val iRR: Double,
+    val iRR: Double? = null,
     @SerializedName("ISK")
-    val iSK: Double,
+    val iSK: Double? = null,
     @SerializedName("JEP")
-    val jEP: Double,
+    val jEP: Double? = null,
     @SerializedName("JMD")
-    val jMD: Double,
+    val jMD: Double? = null,
     @SerializedName("JOD")
-    val jOD: Double,
+    val jOD: Double? = null,
     @SerializedName("JPY")
-    val jPY: Double,
+    val jPY: Double? = null,
     @SerializedName("KES")
-    val kES: Double,
+    val kES: Double? = null,
     @SerializedName("KGS")
-    val kGS: Double,
+    val kGS: Double? = null,
     @SerializedName("KHR")
-    val kHR: Double,
+    val kHR: Double? = null,
     @SerializedName("KMF")
-    val kMF: Double,
+    val kMF: Double? = null,
     @SerializedName("KPW")
-    val kPW: Double,
+    val kPW: Double? = null,
     @SerializedName("KRW")
-    val kRW: Double,
+    val kRW: Double? = null,
     @SerializedName("KWD")
-    val kWD: Double,
+    val kWD: Double? = null,
     @SerializedName("KYD")
-    val kYD: Double,
+    val kYD: Double? = null,
     @SerializedName("KZT")
-    val kZT: Double,
+    val kZT: Double? = null,
     @SerializedName("LAK")
-    val lAK: Double,
+    val lAK: Double? = null,
     @SerializedName("LBP")
-    val lBP: Double,
+    val lBP: Double? = null,
     @SerializedName("LKR")
-    val lKR: Double,
+    val lKR: Double? = null,
     @SerializedName("LRD")
-    val lRD: Double,
+    val lRD: Double? = null,
     @SerializedName("LSL")
-    val lSL: Double,
+    val lSL: Double? = null,
     @SerializedName("LTL")
-    val lTL: Double,
+    val lTL: Double? = null,
     @SerializedName("LVL")
-    val lVL: Double,
+    val lVL: Double? = null,
     @SerializedName("LYD")
-    val lYD: Double,
+    val lYD: Double? = null,
     @SerializedName("MAD")
-    val mAD: Double,
+    val mAD: Double? = null,
     @SerializedName("MDL")
-    val mDL: Double,
+    val mDL: Double? = null,
     @SerializedName("MGA")
-    val mGA: Double,
+    val mGA: Double? = null,
     @SerializedName("MKD")
-    val mKD: Double,
+    val mKD: Double? = null,
     @SerializedName("MMK")
-    val mMK: Double,
+    val mMK: Double? = null,
     @SerializedName("MNT")
-    val mNT: Double,
+    val mNT: Double? = null,
     @SerializedName("MOP")
-    val mOP: Double,
+    val mOP: Double? = null,
     @SerializedName("MRO")
-    val mRO: Double,
+    val mRO: Double? = null,
     @SerializedName("MUR")
-    val mUR: Double,
+    val mUR: Double? = null,
     @SerializedName("MVR")
-    val mVR: Double,
+    val mVR: Double? = null,
     @SerializedName("MWK")
-    val mWK: Double,
+    val mWK: Double? = null,
     @SerializedName("MXN")
-    val mXN: Double,
+    val mXN: Double? = null,
     @SerializedName("MYR")
-    val mYR: Double,
+    val mYR: Double? = null,
     @SerializedName("MZN")
-    val mZN: Double,
+    val mZN: Double? = null,
     @SerializedName("NAD")
-    val nAD: Double,
+    val nAD: Double? = null,
     @SerializedName("NGN")
-    val nGN: Double,
+    val nGN: Double? = null,
     @SerializedName("NIO")
-    val nIO: Double,
+    val nIO: Double? = null,
     @SerializedName("NOK")
-    val nOK: Double,
+    val nOK: Double? = null,
     @SerializedName("NPR")
-    val nPR: Double,
+    val nPR: Double? = null,
     @SerializedName("NZD")
-    val nZD: Double,
+    val nZD: Double? = null,
     @SerializedName("OMR")
-    val oMR: Double,
+    val oMR: Double? = null,
     @SerializedName("PAB")
-    val pAB: Double,
+    val pAB: Double? = null,
     @SerializedName("PEN")
-    val pEN: Double,
+    val pEN: Double? = null,
     @SerializedName("PGK")
-    val pGK: Double,
+    val pGK: Double? = null,
     @SerializedName("PHP")
-    val pHP: Double,
+    val pHP: Double? = null,
     @SerializedName("PKR")
-    val pKR: Double,
+    val pKR: Double? = null,
     @SerializedName("PLN")
-    val pLN: Double,
+    val pLN: Double? = null,
     @SerializedName("PYG")
-    val pYG: Double,
+    val pYG: Double? = null,
     @SerializedName("QAR")
-    val qAR: Double,
+    val qAR: Double? = null,
     @SerializedName("RON")
-    val rON: Double,
+    val rON: Double? = null,
     @SerializedName("RSD")
-    val rSD: Double,
+    val rSD: Double? = null,
     @SerializedName("RUB")
-    val rUB: Double,
+    val rUB: Double? = null,
     @SerializedName("RWF")
-    val rWF: Double,
+    val rWF: Double? = null,
     @SerializedName("SAR")
-    val sAR: Double,
+    val sAR: Double? = null,
     @SerializedName("SBD")
-    val sBD: Double,
+    val sBD: Double? = null,
     @SerializedName("SCR")
-    val sCR: Double,
+    val sCR: Double? = null,
     @SerializedName("SDG")
-    val sDG: Double,
+    val sDG: Double? = null,
     @SerializedName("SEK")
-    val sEK: Double,
+    val sEK: Double? = null,
     @SerializedName("SGD")
-    val sGD: Double,
+    val sGD: Double? = null,
     @SerializedName("SHP")
-    val sHP: Double,
+    val sHP: Double? = null,
     @SerializedName("SLL")
-    val sLL: Double,
+    val sLL: Double? = null,
     @SerializedName("SOS")
-    val sOS: Double,
+    val sOS: Double? = null,
     @SerializedName("SRD")
-    val sRD: Double,
+    val sRD: Double? = null,
     @SerializedName("STD")
-    val sTD: Double,
+    val sTD: Double? = null,
     @SerializedName("SVC")
-    val sVC: Double,
+    val sVC: Double? = null,
     @SerializedName("SYP")
-    val sYP: Double,
+    val sYP: Double? = null,
     @SerializedName("SZL")
-    val sZL: Double,
+    val sZL: Double? = null,
     @SerializedName("THB")
-    val tHB: Double,
+    val tHB: Double? = null,
     @SerializedName("TJS")
-    val tJS: Double,
+    val tJS: Double? = null,
     @SerializedName("TMT")
-    val tMT: Double,
+    val tMT: Double? = null,
     @SerializedName("TND")
-    val tND: Double,
+    val tND: Double? = null,
     @SerializedName("TOP")
-    val tOP: Double,
+    val tOP: Double? = null,
     @SerializedName("TRY")
-    val tRY: Double,
+    val tRY: Double? = null,
     @SerializedName("TTD")
-    val tTD: Double,
+    val tTD: Double? = null,
     @SerializedName("TWD")
-    val tWD: Double,
+    val tWD: Double? = null,
     @SerializedName("TZS")
-    val tZS: Double,
+    val tZS: Double? = null,
     @SerializedName("UAH")
-    val uAH: Double,
+    val uAH: Double? = null,
     @SerializedName("UGX")
-    val uGX: Double,
+    val uGX: Double? = null,
     @SerializedName("USD")
-    val uSD: Double,
+    val uSD: Double? = null,
     @SerializedName("UYU")
-    val uYU: Double,
+    val uYU: Double? = null,
     @SerializedName("UZS")
-    val uZS: Double,
+    val uZS: Double? = null,
     @SerializedName("VEF")
-    val vEF: Double,
+    val vEF: Double? = null,
     @SerializedName("VND")
-    val vND: Double,
+    val vND: Double? = null,
     @SerializedName("VUV")
-    val vUV: Double,
+    val vUV: Double? = null,
     @SerializedName("WST")
-    val wST: Double,
+    val wST: Double? = null,
     @SerializedName("XAF")
-    val xAF: Double,
+    val xAF: Double? = null,
     @SerializedName("XAG")
-    val xAG: Double,
+    val xAG: Double? = null,
     @SerializedName("XAU")
-    val xAU: Double,
+    val xAU: Double? = null,
     @SerializedName("XCD")
-    val xCD: Double,
+    val xCD: Double? = null,
     @SerializedName("XDR")
-    val xDR: Double,
+    val xDR: Double? = null,
     @SerializedName("XOF")
-    val xOF: Double,
+    val xOF: Double? = null,
     @SerializedName("XPF")
-    val xPF: Double,
+    val xPF: Double? = null,
     @SerializedName("YER")
-    val yER: Double,
+    val yER: Double? = null,
     @SerializedName("ZAR")
-    val zAR: Double,
+    val zAR: Double? = null,
     @SerializedName("ZMK")
-    val zMK: Double,
+    val zMK: Double? = null,
     @SerializedName("ZMW")
-    val zMW: Double,
+    val zMW: Double? = null,
     @SerializedName("ZWL")
-    val zWL: Double
-)
+    val zWL: Double? = null
+) : Serializable
