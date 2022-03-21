@@ -1,14 +1,22 @@
 package com.mahmoudalim.data.di
 
+import android.content.Context
+import androidx.room.Room
 import com.mahmoudalim.core.utils.Const.BASE_URL
+import com.mahmoudalim.core.utils.Const.DATABASE_NAME
 import com.mahmoudalim.data.api.CurrencyApi
+import com.mahmoudalim.data.database.CurrencyDatabase
+import com.mahmoudalim.data.database.HistoryDao
+import com.mahmoudalim.data.datasource.local.CurrencyLocalDataSrc
 import com.mahmoudalim.data.repo.CurrencyRepository
 import com.mahmoudalim.data.repo.DefaultCurrencyRepo
 import com.mahmoudalim.data.datasource.local.DefaultCurrencyLocalDataSrc
+import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
 import com.mahmoudalim.data.datasource.remote.DefaultCurrencyRemoteDataSrc
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -59,21 +67,21 @@ object DataModule {
     @Singleton
     @Provides
     fun provideCurrencyRepository(
-        defaultCurrencyLocalDataSrc: DefaultCurrencyLocalDataSrc,
-        defaultCurrencyRemoteDataSrc: DefaultCurrencyRemoteDataSrc
+        currencyLocalDataSrc: CurrencyLocalDataSrc,
+        currencyRemoteDataSrc: CurrencyRemoteDataSrc
     ): CurrencyRepository =
-        DefaultCurrencyRepo(defaultCurrencyRemoteDataSrc, defaultCurrencyLocalDataSrc)
+        DefaultCurrencyRepo(currencyRemoteDataSrc, currencyLocalDataSrc)
 
 
     @Singleton
     @Provides
-    fun provideCurrencyLocalDataSrc(): DefaultCurrencyLocalDataSrc =
-        DefaultCurrencyLocalDataSrc()
+    fun provideCurrencyLocalDataSrc(historyDao: HistoryDao): CurrencyLocalDataSrc =
+        DefaultCurrencyLocalDataSrc(historyDao)
 
 
     @Singleton
     @Provides
-    fun provideCurrencyRemoteDataSrc(api: CurrencyApi): DefaultCurrencyRemoteDataSrc =
+    fun provideCurrencyRemoteDataSrc(api: CurrencyApi): CurrencyRemoteDataSrc =
         DefaultCurrencyRemoteDataSrc(api)
 
 
