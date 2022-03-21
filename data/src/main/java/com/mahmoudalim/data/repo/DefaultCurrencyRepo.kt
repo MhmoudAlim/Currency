@@ -1,9 +1,11 @@
 package com.mahmoudalim.data.repo
 
 import com.mahmoudalim.core.utils.AppResponse
+import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.CurrencyResponse
 import com.mahmoudalim.data.datasource.local.CurrencyLocalDataSrc
 import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -16,7 +18,14 @@ class DefaultCurrencyRepo @Inject constructor(
 
     override suspend fun getRates(base: String, key: String):
             AppResponse<CurrencyResponse> {
-//        /when(enum) retuen datsrc.get
         return remoteDataSrc.getRates(base, key)
+    }
+
+    override suspend fun fetchConversionsHistoryList(): Flow<List<HistoryEntity>> {
+        return localDataSrc.fetchConversionsHistoryList()
+    }
+
+    override suspend fun insertConversionRecord(historyEntity: HistoryEntity) {
+        localDataSrc.insertConversionRecord(historyEntity)
     }
 }
