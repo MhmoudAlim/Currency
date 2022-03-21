@@ -10,7 +10,7 @@ import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
 import com.mahmoudalim.data.repo.CurrencyRepository
 import com.mahmoudalim.data.utils.CurrencyItemMapper
-import com.mahmoudalim.data.utils.RateFromCurrency
+import com.mahmoudalim.data.utils.RateFromCurrencyParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -79,8 +79,8 @@ class ConverterViewModel @Inject constructor(
         toCurrency: String,
         fromAmount: Double?
     ): Double {
-        val fromCurrencyRatioToBase = 1.0 / RateFromCurrency(fromCurrency, _allRates.value)!!
-        val toCurrencyRatioToBase = 1.0 / RateFromCurrency(toCurrency, _allRates.value)!!
+        val fromCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(fromCurrency, _allRates.value)!!
+        val toCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(toCurrency, _allRates.value)!!
 
         val conversionValue = fromCurrencyRatioToBase / toCurrencyRatioToBase
 

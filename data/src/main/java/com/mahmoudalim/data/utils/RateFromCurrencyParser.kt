@@ -5,7 +5,7 @@ import com.mahmoudalim.data.models.Ratings
 /**
  * Created by Mahmoud Alim on 19/03/2022.
  */
-object RateFromCurrency {
+object RateFromCurrencyParser {
 
     operator fun invoke(Currency: String, rateS: Ratings): Double? = when (Currency) {
         "AED" -> rateS.AED

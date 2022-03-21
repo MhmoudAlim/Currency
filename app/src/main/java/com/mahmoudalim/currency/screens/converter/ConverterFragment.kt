@@ -36,7 +36,7 @@ class ConverterFragment : Fragment() {
 
         setupSpinnersObservers()
 
-        handleOnAmountChangedConversion()
+        handleOnAmountChanged()
 
         binding.btnSwap.setOnClickListener {
             handleOnSwapSpinnerValues()
@@ -62,7 +62,7 @@ class ConverterFragment : Fragment() {
         setupOnToSpinnerValueChanged()
     }
 
-    private fun handleOnAmountChangedConversion() {
+    private fun handleOnAmountChanged() {
         binding.etAmount.doAfterTextChanged {
             viewModel.convert(amount = binding.etAmount.text.toString())
         }
