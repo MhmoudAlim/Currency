@@ -6,6 +6,7 @@ import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.core.utils.Const.API_KEY
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.core.utils.DispatcherProvider
+import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
 import com.mahmoudalim.data.repo.CurrencyRepository
@@ -15,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.*
 
 import javax.inject.Inject
 import kotlin.math.round
@@ -41,7 +43,7 @@ class ConverterViewModel @Inject constructor(
     val conversion: StateFlow<CurrencyEvent> = _conversion
 
 
-    private val _allRates = MutableStateFlow<Ratings>(Ratings())
+    private val _allRates = MutableStateFlow(Ratings())
     var allRates: StateFlow<Ratings> = _allRates
 
 
@@ -58,12 +60,14 @@ class ConverterViewModel @Inject constructor(
             is AppResponse.NetworkError -> CurrencyEvent.Failure("Network error: ${response.message!!}")
             is AppResponse.ServerError -> CurrencyEvent.Failure("Server error: ${response.message!!}")
         }
+
     }
 
-    fun convert(
+    fun convertCurrency(
         amount: String,
         fromCurrency: String = selectedFromCurrency.value.value,
         toCurrency: String = selectedToCurrency.value.value,
+        saveConversion: Boolean = true
     ) {
         val fromAmount = amount.toDoubleOrNull()
         if (validateInput(fromAmount)) return
@@ -72,7 +76,11 @@ class ConverterViewModel @Inject constructor(
 
         val convertedCurrency = round(final * 100) / 100
         _conversion.value = CurrencyEvent.Success("$convertedCurrency")
+
+        if (saveConversion)
+            insertConversionToDatabase(fromCurrency, toCurrency, amount, convertedCurrency)
     }
+
 
     private fun calculateRatesRatioToBase(
         fromCurrency: String,
@@ -96,5 +104,25 @@ class ConverterViewModel @Inject constructor(
         return false
     }
 
+
+    private fun insertConversionToDatabase(
+        fromCurrency: String,
+        toCurrency: String,
+        amount: String,
+        convertedCurrency: Double
+    ) {
+        viewModelScope.launch(dispatchers.io) {
+            repo.insertConversionRecord(
+                HistoryEntity(
+                    fromCurrency = fromCurrency,
+                    toCurrency = toCurrency,
+                    amount = amount,
+                    result = convertedCurrency.toString(),
+                    date = "",
+                    timeInMillis = Calendar.getInstance().timeInMillis
+                )
+            )
+        }
+    }
 
 }

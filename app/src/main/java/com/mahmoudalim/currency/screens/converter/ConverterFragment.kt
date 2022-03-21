@@ -64,7 +64,7 @@ class ConverterFragment : Fragment() {
 
     private fun handleOnAmountChanged() {
         binding.etAmount.doAfterTextChanged {
-            viewModel.convert(amount = binding.etAmount.text.toString())
+            viewModel.convertCurrency(amount = binding.etAmount.text.toString())
         }
     }
 
@@ -83,7 +83,7 @@ class ConverterFragment : Fragment() {
     private fun swapConversionValues() {
         val resultValueTemp = binding.etResult.text
         binding.etAmount.text = resultValueTemp
-        viewModel.convert(
+        viewModel.convertCurrency(
             amount = resultValueTemp.toString(),
             fromCurrency = viewModel.selectedToCurrency.value.value,
             toCurrency = viewModel.selectedFromCurrency.value.value
