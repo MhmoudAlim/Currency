@@ -53,6 +53,10 @@ dependencies {
     kapt DaggerHilt.hiltCompiler
     kapt DaggerHilt.hiltAndroidCompiler
 
+    implementation Room.roomRuntime
+    kapt Room.roomCompiler
+    implementation Room.roomKtx
+
     implementation Google.gson
     implementation Retrofit.retrofit
     implementation Retrofit.gsonConverter
