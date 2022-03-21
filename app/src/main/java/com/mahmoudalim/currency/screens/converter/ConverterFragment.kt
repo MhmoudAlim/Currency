@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.core.view.isEmpty
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
+import com.mahmoudalim.data.models.SpinnerItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +51,7 @@ class ConverterFragment : Fragment() {
                     is CurrencyEvent.Failure -> {
                         binding.etResult.setText(it.errorText)
                     }
-                    else -> Unit
+                    is CurrencyEvent.Idle -> Unit
                 }
             }
         }
@@ -74,16 +74,27 @@ class ConverterFragment : Fragment() {
     }
 
     private fun swapIndices() {
+        swapSpinnerValues()
+
+        if (binding.etAmount.text?.isEmpty() == true || binding.etAmount.text?.isEmpty() == true) return
+        swapConversionValues()
+    }
+
+    private fun swapConversionValues() {
+        val resultValueTemp = binding.etResult.text
+        binding.etAmount.text = resultValueTemp
+        viewModel.convert(
+            amount = resultValueTemp.toString(),
+            fromCurrency = viewModel.selectedToCurrency.value.value,
+            toCurrency = viewModel.selectedFromCurrency.value.value
+        )
+    }
+
+    private fun swapSpinnerValues() {
         val fromCurrencyTemp = viewModel.selectedFromCurrency.value
         val toCurrencyTemp = viewModel.selectedToCurrency.value
         binding.spToCurrency.setSelection(fromCurrencyTemp.position)
         binding.spFromCurrency.setSelection(toCurrencyTemp.position)
-
-        if (binding.etAmount.text?.isEmpty() == true || binding.etAmount.text?.isEmpty() == true) return
-        val amountValueTemp = binding.etAmount.text
-        val resultValueTemp = binding.etResult.text
-        binding.etResult.text = amountValueTemp
-        binding.etAmount.text = resultValueTemp
     }
 
 
@@ -96,7 +107,7 @@ class ConverterFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                viewModel.selectedToCurrency.value = ConverterViewModel.SpinnerItem(
+                viewModel.selectedToCurrency.value = SpinnerItem(
                     position = position,
                     value = parent?.selectedItem.toString()
                 )
@@ -114,7 +125,7 @@ class ConverterFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    viewModel.selectedFromCurrency.value = ConverterViewModel.SpinnerItem(
+                    viewModel.selectedFromCurrency.value = SpinnerItem(
                         position = position,
                         value = parent?.selectedItem.toString()
                     )

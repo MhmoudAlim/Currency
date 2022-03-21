@@ -7,6 +7,7 @@ import com.mahmoudalim.core.utils.Const.API_KEY
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.core.utils.DispatcherProvider
 import com.mahmoudalim.data.models.Ratings
+import com.mahmoudalim.data.models.SpinnerItem
 import com.mahmoudalim.data.repo.CurrencyRepository
 import com.mahmoudalim.data.utils.CurrencyItemMapper
 import com.mahmoudalim.data.utils.RateFromCurrency
@@ -32,8 +33,6 @@ class ConverterViewModel @Inject constructor(
     init {
         fetchRates()
     }
-
-    data class SpinnerItem(var position: Int = 0, var value: String = "AED")
 
     var selectedFromCurrency = MutableStateFlow(SpinnerItem())
     var selectedToCurrency = MutableStateFlow(SpinnerItem())
