@@ -76,4 +76,14 @@ object DataModule {
     fun provideCurrencyRemoteDataSrc(api: CurrencyApi): DefaultCurrencyRemoteDataSrc =
         DefaultCurrencyRemoteDataSrc(api)
 
+
+    @Provides
+    @Singleton
+    fun provideCurrencyDataBase(@ApplicationContext context: Context): CurrencyDatabase =
+        Room.databaseBuilder(context, CurrencyDatabase::class.java, DATABASE_NAME).build()
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(dataBase: CurrencyDatabase): HistoryDao = dataBase.historyDao()
+
 }
