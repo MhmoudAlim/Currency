@@ -1,12 +1,11 @@
 package com.mahmoudalim.data.di
 
-import com.google.gson.GsonBuilder
 import com.mahmoudalim.core.utils.Const.BASE_URL
 import com.mahmoudalim.data.api.CurrencyApi
 import com.mahmoudalim.data.repo.CurrencyRepository
 import com.mahmoudalim.data.repo.DefaultCurrencyRepo
-import com.mahmoudalim.data.source.local.DefaultCurrencyLocalDataSrc
-import com.mahmoudalim.data.source.remote.DefaultCurrencyRemoteDataSrc
+import com.mahmoudalim.data.datasource.local.DefaultCurrencyLocalDataSrc
+import com.mahmoudalim.data.datasource.remote.DefaultCurrencyRemoteDataSrc
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

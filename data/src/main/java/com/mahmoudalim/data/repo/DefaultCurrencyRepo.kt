@@ -2,10 +2,8 @@ package com.mahmoudalim.data.repo
 
 import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.data.models.CurrencyResponse
-import com.mahmoudalim.data.source.local.CurrencyLocalDataSrc
-import com.mahmoudalim.data.source.local.DefaultCurrencyLocalDataSrc
-import com.mahmoudalim.data.source.remote.CurrencyRemoteDataSrc
-import com.mahmoudalim.data.source.remote.DefaultCurrencyRemoteDataSrc
+import com.mahmoudalim.data.datasource.local.CurrencyLocalDataSrc
+import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
 import javax.inject.Inject
 
 /**

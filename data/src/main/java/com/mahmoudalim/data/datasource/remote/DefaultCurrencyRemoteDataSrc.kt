@@ -1,4 +1,4 @@
-package com.mahmoudalim.data.source.remote
+package com.mahmoudalim.data.datasource.remote
 
 import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.data.api.CurrencyApi

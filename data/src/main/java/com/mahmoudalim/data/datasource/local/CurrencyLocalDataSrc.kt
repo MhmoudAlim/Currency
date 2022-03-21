@@ -1,4 +1,4 @@
-package com.mahmoudalim.data.source.local
+package com.mahmoudalim.data.datasource.local
 
 /**
  * Created by Mahmoud Alim on 19/03/2022.
