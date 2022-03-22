@@ -1,6 +1,8 @@
 package com.mahmoudalim.data.di
 
+import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.mahmoudalim.core.utils.Const.BASE_URL
 import com.mahmoudalim.core.utils.Const.DATABASE_NAME
@@ -13,6 +15,9 @@ import com.mahmoudalim.data.repo.DefaultCurrencyRepo
 import com.mahmoudalim.data.datasource.local.DefaultCurrencyLocalDataSrc
 import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
 import com.mahmoudalim.data.datasource.remote.DefaultCurrencyRemoteDataSrc
+import com.mahmoudalim.data.pref.DefaultAppPreferences
+import com.mahmoudalim.data.pref.AppPreferences
+import com.mahmoudalim.data.pref.AppPreferences.Companion.PREF_TAG
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -93,5 +98,19 @@ object DataModule {
     @Provides
     @Singleton
     fun provideHistoryDao(dataBase: CurrencyDatabase): HistoryDao = dataBase.historyDao()
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(
+        app: Application
+    ): SharedPreferences {
+        return app.getSharedPreferences(PREF_TAG, Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppPreferences(sharedPreferences: SharedPreferences): AppPreferences {
+        return DefaultAppPreferences(sharedPreferences)
+    }
 
 }
