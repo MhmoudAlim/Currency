@@ -1,4 +1,4 @@
-package com.mahmoudalim.core.utils
+package com.mahmoudalim.core.mapper
 
 /**
  * Created by Mahmoud Alim on 20/03/2022.

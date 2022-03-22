@@ -1,6 +1,6 @@
 package com.mahmoudalim.data.utils
 
-import com.mahmoudalim.core.utils.Mapper
+import com.mahmoudalim.core.mapper.Mapper
 import com.mahmoudalim.data.models.CurrencyModelItem
 import com.mahmoudalim.data.models.CurrencyResponse
 import com.mahmoudalim.data.models.Ratings
