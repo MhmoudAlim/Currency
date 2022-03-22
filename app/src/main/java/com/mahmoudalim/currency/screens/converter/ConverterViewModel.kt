@@ -2,6 +2,7 @@ package com.mahmoudalim.currency.screens.converter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mahmoudalim.core.date.AppDate
 import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.core.utils.Const.API_KEY
 import com.mahmoudalim.core.utils.CurrencyEvent
@@ -17,6 +18,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDateTime
 import java.util.*
 
 import javax.inject.Inject
@@ -92,25 +94,29 @@ class ConverterViewModel @Inject constructor(
         toCurrency: String,
         fromAmount: Double?
     ): Double {
-        if (_allRates.value == null) {
-            _allRates.value = appPreferences.loadURates()
-        }
-        val fromCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(fromCurrency, _allRates.value!!)!!
-        val toCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(toCurrency, _allRates.value!!)!!
+
+        val fromCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(fromCurrency)
+        val toCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(toCurrency)
 
         val conversionValue = fromCurrencyRatioToBase / toCurrencyRatioToBase
 
         return conversionValue * fromAmount!!
     }
 
+    private fun rateFromCurrencyParser(currency: String): Double {
+        if (_allRates.value == null)
+            _allRates.value = appPreferences.loadURates()
 
-    private fun validateInput(fromAmount: Double?): Boolean {
-        if (fromAmount == null) {
-            _conversion.value = CurrencyEvent.Failure("")
-            return true
+        val rate = RateFromCurrencyParser(currency, _allRates.value!!)
+        if (rate == null) {
+            _conversion.value = CurrencyEvent.Failure("Unexpected error")
+            return 0.0
         }
-        return false
+        return rate
     }
+
+
+    private fun validateInput(fromAmount: Double?): Boolean = fromAmount == null
 
 
     private fun insertConversionToDatabase(
@@ -126,8 +132,7 @@ class ConverterViewModel @Inject constructor(
                     toCurrency = toCurrency,
                     amount = amount,
                     result = convertedCurrency.toString(),
-                    date = "",
-                    timeInMillis = Calendar.getInstance().timeInMillis
+                    date = AppDate.format(),
                 )
             )
         }
