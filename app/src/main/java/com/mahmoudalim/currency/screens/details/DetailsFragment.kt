@@ -67,7 +67,11 @@ class DetailsFragment : Fragment() {
         LaunchedEffect(key1 = viewModel.historyList) {
             viewModel.fetchHistoryFromDatabase()
         }
-        Column() {
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Last 3 days Historical list", textAlign = Center)
             viewModel.lastThreeDays().forEach { day ->
                 Card(
                     modifier = Modifier
@@ -89,7 +93,6 @@ class DetailsFragment : Fragment() {
                 style = TextStyle(textDecoration = TextDecoration.Underline),
                 textAlign = Center
             )
-            Spacer(modifier = Modifier.height(8.dp))
             LazyColumn(
                 Modifier.padding(4.dp), contentPadding = PaddingValues
                     (vertical = 16.dp)
@@ -100,7 +103,6 @@ class DetailsFragment : Fragment() {
             }
         }
     }
-
 
 
     @Composable
