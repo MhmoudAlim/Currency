@@ -107,6 +107,8 @@ class DetailsFragment : Fragment() {
 
     @Composable
     private fun PopularCurrenciesListView() {
+        val base = arguments?.getString("base")
+
 
     }
 

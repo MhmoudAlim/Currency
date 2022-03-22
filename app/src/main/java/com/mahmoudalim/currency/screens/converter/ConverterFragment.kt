@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
@@ -27,7 +29,7 @@ class ConverterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentConverterBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -45,7 +47,9 @@ class ConverterFragment : Fragment() {
         }
 
         binding.btnDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_converterFragment_to_detailsFragment)
+            val base = viewModel.selectedFromCurrency.value.value
+            val bundle = bundleOf("base" to base)
+            findNavController().navigate(R.id.action_converterFragment_to_detailsFragment, bundle)
         }
 
         lifecycleScope.launchWhenStarted {
