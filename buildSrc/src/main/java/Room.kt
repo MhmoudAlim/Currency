@@ -7,4 +7,7 @@ object Room {
     const val roomRuntime = "androidx.room:room-runtime:$version"
     const val roomCompiler = "androidx.room:room-compiler:$version"
     const val roomKtx = "androidx.room:room-ktx:$version"
+
+    const val sqlLite = "androidx.sqlite:sqlite:2.0.1"
+    const val sqlCipher = "net.zetetic:android-database-sqlcipher:4.5.0"
 }

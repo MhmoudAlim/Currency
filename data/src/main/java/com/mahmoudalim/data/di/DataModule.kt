@@ -1,6 +1,7 @@
 package com.mahmoudalim.data.di
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import androidx.room.Room
 import com.mahmoudalim.core.utils.Const.BASE_URL
 import com.mahmoudalim.core.utils.Const.DATABASE_NAME
@@ -18,6 +19,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SQLiteDatabase.getBytes
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -84,14 +87,24 @@ object DataModule {
     fun provideCurrencyRemoteDataSrc(api: CurrencyApi): CurrencyRemoteDataSrc =
         DefaultCurrencyRemoteDataSrc(api)
 
-
     @Provides
     @Singleton
-    fun provideCurrencyDataBase(@ApplicationContext context: Context): CurrencyDatabase =
-        Room.databaseBuilder(context, CurrencyDatabase::class.java, DATABASE_NAME).build()
+    fun provideCurrencyDataBase(
+        @ApplicationContext context: Context,
+        supportFactory: SupportFactory
+    ): CurrencyDatabase {
+        val builder = Room.databaseBuilder(context, CurrencyDatabase::class.java, DATABASE_NAME)
+        builder.openHelperFactory(supportFactory)
+        return builder.build()
+    }
 
     @Provides
     @Singleton
     fun provideHistoryDao(dataBase: CurrencyDatabase): HistoryDao = dataBase.historyDao()
+
+    @Provides
+    @Singleton
+    fun provideSqlCipherSupportFactory(): SupportFactory =
+        SupportFactory(SQLiteDatabase.getBytes("s5Psacx4ras3VeryL0n9".toCharArray()))
 
 }

@@ -46,6 +46,8 @@ dependencies {
     implementation Room.roomRuntime
     kapt Room.roomCompiler
     implementation Room.roomKtx
+    implementation Room.sqlLite
+    implementation Room.sqlCipher
 
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
