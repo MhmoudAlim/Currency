@@ -28,6 +28,12 @@ android {
     buildFeatures {
         viewBinding  true
         dataBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.composeVersion
+        kotlinCompilerVersion Kotlin.version
     }
 
     compileOptions {
@@ -48,6 +54,14 @@ dependencies {
     implementation AndroidX.constraintLayout
     implementation AndroidX.fragmentNavigation
     implementation AndroidX.uiNavigation
+
+    implementation Compose.ui
+    implementation Compose.material
+    implementation Compose.uiToolingPreview
+    implementation Compose.lifecycle
+    implementation Compose.activityCompose
+    implementation Compose.composeKtx
+
 
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
