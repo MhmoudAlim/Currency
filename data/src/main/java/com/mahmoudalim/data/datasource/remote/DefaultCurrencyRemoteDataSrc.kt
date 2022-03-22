@@ -19,7 +19,7 @@ class DefaultCurrencyRemoteDataSrc @Inject constructor(
         return try {
             val response = api.getRates(base = base, access_key = accessKey)
             val result = response.body()
-            if (response.isSuccessful && result != null) {
+            if (response.isSuccessful && result != null && result.success) {
                 AppResponse.Success(result)
             } else {
                 AppResponse.ServerError(response.message())
