@@ -21,7 +21,7 @@ class DefaultCurrencyRepo @Inject constructor(
         return remoteDataSrc.getRates(base, key)
     }
 
-    override suspend fun fetchConversionsHistoryList(): Flow<List<HistoryEntity>> {
+    override suspend fun fetchConversionsHistoryList(): List<HistoryEntity> {
         return localDataSrc.fetchConversionsHistoryList()
     }
 

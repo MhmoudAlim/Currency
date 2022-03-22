@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface CurrencyLocalDataSrc {
 
     suspend fun insertConversionRecord(historyEntity: HistoryEntity)
-    suspend fun fetchConversionsHistoryList(): Flow<List<HistoryEntity>>
+    suspend fun fetchConversionsHistoryList(): List<HistoryEntity>
 }

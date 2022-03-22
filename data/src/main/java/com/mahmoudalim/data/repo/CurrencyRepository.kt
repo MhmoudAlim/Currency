@@ -12,6 +12,6 @@ import kotlinx.coroutines.flow.Flow
 interface CurrencyRepository {
 
     suspend fun getRates(base: String, key : String) : AppResponse<CurrencyResponse>
-    suspend fun fetchConversionsHistoryList(): Flow<List<HistoryEntity>>
+    suspend fun fetchConversionsHistoryList(): List<HistoryEntity>
     suspend fun insertConversionRecord(historyEntity: HistoryEntity)
 }

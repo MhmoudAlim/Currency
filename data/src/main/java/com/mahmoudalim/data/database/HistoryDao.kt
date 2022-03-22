@@ -17,9 +17,9 @@ interface HistoryDao {
     suspend fun insertConversionRecord(entity: HistoryEntity)
 
     @Query("SELECT * FROM history_table WHERE date = :date")
-    fun fetchRecordsByDate(date: String): Flow<List<HistoryEntity>>
+    fun fetchRecordsByDate(date: String): List<HistoryEntity>
 
 
     @Query("SELECT * FROM history_table")
-    fun fetchAllRecords(): Flow<List<HistoryEntity>>
+    fun fetchAllRecords(): List<HistoryEntity>
 }

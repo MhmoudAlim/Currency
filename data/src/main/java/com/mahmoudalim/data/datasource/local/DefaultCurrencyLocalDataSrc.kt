@@ -16,7 +16,7 @@ class DefaultCurrencyLocalDataSrc @Inject constructor(
         historyDao.insertConversionRecord(historyEntity)
     }
 
-    override suspend fun fetchConversionsHistoryList(): Flow<List<HistoryEntity>> {
+    override suspend fun fetchConversionsHistoryList(): List<HistoryEntity> {
         return historyDao.fetchAllRecords()
     }
 
