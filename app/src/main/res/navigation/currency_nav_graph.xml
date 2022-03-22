@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_converter">
         <action
             android:id="@+id/action_converterFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
