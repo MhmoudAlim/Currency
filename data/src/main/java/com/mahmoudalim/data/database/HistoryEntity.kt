@@ -18,5 +18,4 @@ data class HistoryEntity(
     var amount: String,
     var result: String,
     var date: String,
-    var timeInMillis: Long
 ) : Serializable
