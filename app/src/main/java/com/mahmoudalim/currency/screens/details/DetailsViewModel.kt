@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mahmoudalim.core.date.AppDate
 import com.mahmoudalim.core.utils.DispatcherProvider
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.pref.AppPreferences
@@ -37,6 +38,9 @@ class DetailsViewModel @Inject constructor(
             historyList = repo.fetchConversionsHistoryList()
         }
     }
+
+
+    fun lastThreeDays() = AppDate.pastDaysOf(3)
 
 
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
@@ -66,41 +67,41 @@ class DetailsFragment : Fragment() {
         LaunchedEffect(key1 = viewModel.historyList) {
             viewModel.fetchHistoryFromDatabase()
         }
-
-        LazyColumn() {
-            items(viewModel.historyList) {
-                HistoryListItemView(it)
-            }
-        }
-
-    }
-
-    @Composable
-    private fun HistoryListItemView(item: HistoryEntity) {
-        Card(modifier = Modifier.padding(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(8.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(text = item.date, style = TextStyle(textDecoration = TextDecoration.Underline))
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
+        Column() {
+            viewModel.lastThreeDays().forEach { day ->
+                Card(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(8.dp)
+                        .weight(.33f)
                 ) {
-                    Text(text = "${item.amount} ${item.fromCurrency}")
-                    Text(text = " : ")
-                    Text(text = "${item.result} ${item.toCurrency}")
+                    DayItemView(day)
                 }
             }
         }
-
     }
+
+    @Composable
+    private fun DayItemView(day: String) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = day,
+                style = TextStyle(textDecoration = TextDecoration.Underline),
+                textAlign = Center
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyColumn(
+                Modifier.padding(4.dp), contentPadding = PaddingValues
+                    (vertical = 16.dp)
+            ) {
+                items(viewModel.historyList) { item ->
+                    HistoryListItemView(item, day)
+                }
+            }
+        }
+    }
+
+
 
     @Composable
     private fun PopularCurrenciesListView() {
