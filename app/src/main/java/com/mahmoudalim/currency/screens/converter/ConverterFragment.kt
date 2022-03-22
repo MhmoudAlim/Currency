@@ -9,7 +9,9 @@ import android.widget.AdapterView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.mahmoudalim.core.utils.CurrencyEvent
+import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
 import com.mahmoudalim.data.models.SpinnerItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +42,10 @@ class ConverterFragment : Fragment() {
 
         binding.btnSwap.setOnClickListener {
             handleOnSwapSpinnerValues()
+        }
+
+        binding.btnDetails.setOnClickListener {
+            findNavController().navigate(R.id.action_converterFragment_to_detailsFragment)
         }
 
         lifecycleScope.launchWhenStarted {

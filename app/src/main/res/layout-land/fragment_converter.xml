@@ -36,7 +36,7 @@
         app:layout_constraintGuide_percent=".95" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
