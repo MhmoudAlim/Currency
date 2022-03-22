@@ -9,6 +9,7 @@ import com.mahmoudalim.core.utils.DispatcherProvider
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
+import com.mahmoudalim.data.pref.AppPreferences
 import com.mahmoudalim.data.repo.CurrencyRepository
 import com.mahmoudalim.data.utils.CurrencyItemMapper
 import com.mahmoudalim.data.utils.RateFromCurrencyParser
@@ -32,6 +33,9 @@ class ConverterViewModel @Inject constructor(
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
     init {
         fetchRates()
     }
@@ -43,8 +47,8 @@ class ConverterViewModel @Inject constructor(
     val conversion: StateFlow<CurrencyEvent> = _conversion
 
 
-    private val _allRates = MutableStateFlow(Ratings())
-    var allRates: StateFlow<Ratings> = _allRates
+    private val _allRates = MutableStateFlow<Ratings?>(null)
+    val allRates: StateFlow<Ratings?> = _allRates
 
 
     private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
@@ -56,6 +60,7 @@ class ConverterViewModel @Inject constructor(
                     return@launch
                 }
                 _allRates.value = rates.rates
+                appPreferences.saveRates(rates.rates)
             }
             is AppResponse.NetworkError -> CurrencyEvent.Failure("Network error: ${response.message!!}")
             is AppResponse.ServerError -> CurrencyEvent.Failure("Server error: ${response.message!!}")
@@ -87,8 +92,11 @@ class ConverterViewModel @Inject constructor(
         toCurrency: String,
         fromAmount: Double?
     ): Double {
-        val fromCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(fromCurrency, _allRates.value)!!
-        val toCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(toCurrency, _allRates.value)!!
+        if (_allRates.value == null) {
+            _allRates.value = appPreferences.loadURates()
+        }
+        val fromCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(fromCurrency, _allRates.value!!)!!
+        val toCurrencyRatioToBase = 1.0 / RateFromCurrencyParser(toCurrency, _allRates.value!!)!!
 
         val conversionValue = fromCurrencyRatioToBase / toCurrencyRatioToBase
 
