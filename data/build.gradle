@@ -47,6 +47,8 @@ dependencies {
     kapt Room.roomCompiler
     implementation Room.roomKtx
 
+    implementation DateTime.threeTen
+
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
     kapt DaggerHilt.hiltAndroidCompiler
