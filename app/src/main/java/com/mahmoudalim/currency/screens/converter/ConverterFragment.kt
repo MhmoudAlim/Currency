@@ -64,8 +64,17 @@ class ConverterFragment : Fragment() {
 
     private fun handleOnAmountChanged() {
         binding.etAmount.doAfterTextChanged {
+            if (validateDifferentSpinnerValues()) return@doAfterTextChanged
             viewModel.convertCurrency(amount = binding.etAmount.text.toString())
         }
+    }
+
+    private fun validateDifferentSpinnerValues(): Boolean {
+        if (binding.spFromCurrency.selectedItem == binding.spToCurrency.selectedItem) {
+            binding.etResult.text = binding.etAmount.text
+            return true
+        }
+        return false
     }
 
     private fun handleOnSwapSpinnerValues() {
