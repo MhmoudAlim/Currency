@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mahmoudalim.currency.databinding.FragmentDetailsBinding
-import com.mahmoudalim.data.database.HistoryEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,14 +43,14 @@ class DetailsFragment : Fragment() {
                 Row(modifier = Modifier.fillMaxSize()) {
                     Column(
                         modifier = Modifier
-                            .weight(.7f)
+                            .weight(.6f)
                             .fillMaxHeight()
                     ) {
                         HistoricalListView()
                     }
                     Column(
                         modifier = Modifier
-                            .weight(.5f)
+                            .weight(.4f)
                             .fillMaxHeight()
                     ) {
                         PopularCurrenciesListView()
@@ -95,7 +94,7 @@ class DetailsFragment : Fragment() {
             )
             LazyColumn(
                 Modifier.padding(4.dp), contentPadding = PaddingValues
-                    (vertical = 16.dp)
+                    (vertical = 4.dp)
             ) {
                 items(viewModel.historyList) { item ->
                     HistoryListItemView(item, day)
@@ -108,10 +107,23 @@ class DetailsFragment : Fragment() {
     @Composable
     private fun PopularCurrenciesListView() {
         val base = arguments?.getString("base")
-
-
+        val popularConversionsList = viewModel.generateList(base ?: "AED")
+        Text(text = "Popular Currencies", textAlign = Center, modifier = Modifier.fillMaxWidth())
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        ) {
+            LazyColumn(
+                Modifier.padding(4.dp), contentPadding = PaddingValues
+                    (vertical = 8.dp)
+            ) {
+                items(popularConversionsList) { item ->
+                    PopularListItemView(base, item)
+                }
+            }
+        }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
