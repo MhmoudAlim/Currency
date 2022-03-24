@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.mahmoudalim.core.utils.CurrencyEvent
+import com.mahmoudalim.core.utils.UiEvent
 import com.mahmoudalim.core.utils.hideKeyboard
 import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
+import com.mahmoudalim.currency.utils.snackBar
 import com.mahmoudalim.data.models.SpinnerItem
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +35,6 @@ class ConverterFragment : Fragment() {
     ): View {
         _binding = FragmentConverterBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +43,10 @@ class ConverterFragment : Fragment() {
         setupSpinnersObservers()
 
         handleOnAmountChanged()
+
+        collectCurrencyEvents()
+
+        collectUiEvents()
 
         binding.btnSwap.setOnClickListener {
             it.hideKeyboard()
@@ -53,6 +59,29 @@ class ConverterFragment : Fragment() {
             findNavController().navigate(R.id.action_converterFragment_to_detailsFragment, bundle)
         }
 
+    }
+
+    private fun collectUiEvents() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiEvent.collect {
+                when (it) {
+                    is UiEvent.Idle -> Unit
+                    is UiEvent.ShowSnackBar -> snackBar(
+                        view = binding.root,
+                        message = it.message
+                    )
+                    is UiEvent.ShowToast -> Toast.makeText(
+                        context,
+                        it.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+            }
+        }
+    }
+
+    private fun collectCurrencyEvents() {
         lifecycleScope.launchWhenStarted {
             viewModel.conversion.collect {
                 when (it) {
@@ -60,7 +89,7 @@ class ConverterFragment : Fragment() {
                         binding.etResult.setText(it.resultText)
                     }
                     is CurrencyEvent.Failure -> {
-                        binding.etResult.setText(it.errorText)
+                        binding.etResult.setText("0")
                     }
                     is CurrencyEvent.Idle -> Unit
                 }

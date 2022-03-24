@@ -7,6 +7,7 @@ import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.core.utils.Const.API_KEY
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.core.utils.DispatcherProvider
+import com.mahmoudalim.core.utils.UiEvent
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
@@ -46,9 +47,10 @@ class ConverterViewModel @Inject constructor(
     private val _conversion = MutableStateFlow<CurrencyEvent>(CurrencyEvent.Idle)
     val conversion: StateFlow<CurrencyEvent> = _conversion
 
+    private val _uiEvent = MutableStateFlow<UiEvent>(UiEvent.Idle)
+    val uiEvent: StateFlow<UiEvent> = _uiEvent
 
     private val _allRates = MutableStateFlow<Ratings?>(null)
-    val allRates: StateFlow<Ratings?> = _allRates
 
 
     private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
@@ -56,14 +58,16 @@ class ConverterViewModel @Inject constructor(
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
                 if (rates == null) {
-                    _conversion.value = CurrencyEvent.Failure("Unexpected error")
+                    _uiEvent.value = UiEvent.ShowToast("Unexpected error")
                     return@launch
                 }
                 _allRates.value = rates.rates
                 appPreferences.saveRates(rates.rates)
             }
-            is AppResponse.NetworkError -> CurrencyEvent.Failure("Network error: ${response.message!!}")
-            is AppResponse.ServerError -> CurrencyEvent.Failure("Server error: ${response.message!!}")
+            is AppResponse.NetworkError -> _uiEvent.value =
+                UiEvent.ShowSnackBar("Network error: ${response.message!!}")
+            is AppResponse.ServerError -> _uiEvent.value =
+                UiEvent.ShowSnackBar("Server error: ${response.message!!}")
         }
 
     }
@@ -107,7 +111,7 @@ class ConverterViewModel @Inject constructor(
 
         val rate = RateFromCurrencyParser(currency, _allRates.value!!)
         if (rate == null) {
-            _conversion.value = CurrencyEvent.Failure("Unexpected error")
+            _uiEvent.value = UiEvent.ShowToast("Parsing error")
             return 0.0
         }
         return rate
