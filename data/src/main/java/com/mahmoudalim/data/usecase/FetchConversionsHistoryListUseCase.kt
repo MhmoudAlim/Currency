@@ -1,0 +1,18 @@
+package com.mahmoudalim.data.usecase
+
+import com.mahmoudalim.data.database.HistoryEntity
+import com.mahmoudalim.data.repo.CurrencyRepository
+import javax.inject.Inject
+
+/**
+ * Created by Mahmoud Alim on 24/03/2022.
+ */
+class FetchConversionsHistoryListUseCase @Inject constructor(
+    private val repository: CurrencyRepository
+) {
+
+    suspend operator fun invoke(): List<HistoryEntity> {
+        return repository.fetchConversionsHistoryList()
+    }
+
+}
