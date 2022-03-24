@@ -1,4 +1,4 @@
-package com.mahmoudalim.currency
+package com.mahmoudalim.currency.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
