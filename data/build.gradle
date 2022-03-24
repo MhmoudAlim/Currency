@@ -52,4 +52,11 @@ dependencies {
     implementation DaggerHilt.hiltAndroid
     kapt DaggerHilt.hiltCompiler
     kapt DaggerHilt.hiltAndroidCompiler
+
+    testImplementation Testing.junit4
+    testImplementation Testing.truth
+    testImplementation Testing.coroutines
+    testImplementation Testing.mockWebServer
+    testImplementation Testing.hiltTesting
+
 }
