@@ -10,7 +10,7 @@ import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
 import com.mahmoudalim.data.pref.AppPreferences
-import com.mahmoudalim.data.repo.CurrencyRepository
+import com.mahmoudalim.data.usecase.CurrencyUseCases
 import com.mahmoudalim.data.utils.CurrencyItemMapper
 import com.mahmoudalim.data.utils.RateFromCurrencyParser
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +28,7 @@ import kotlin.math.round
 
 @HiltViewModel
 class ConverterViewModel @Inject constructor(
-    private val repo: CurrencyRepository,
+    private val useCases: CurrencyUseCases,
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
@@ -52,7 +52,7 @@ class ConverterViewModel @Inject constructor(
 
 
     private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
-        when (val response = repo.getRates("EUR", API_KEY)) {
+        when (val response = useCases.getAllRatesUseCase("EUR", API_KEY)) {
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
                 if (rates == null) {
@@ -126,7 +126,7 @@ class ConverterViewModel @Inject constructor(
         convertedCurrency: Double
     ) {
         viewModelScope.launch(dispatchers.io) {
-            repo.insertConversionRecord(
+            useCases.insertConversionRecordUseCase(
                 HistoryEntity(
                     fromCurrency = fromCurrency,
                     toCurrency = toCurrency,

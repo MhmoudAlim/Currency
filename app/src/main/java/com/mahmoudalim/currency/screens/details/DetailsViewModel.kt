@@ -1,7 +1,6 @@
 package com.mahmoudalim.currency.screens.details
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,7 @@ import com.mahmoudalim.core.utils.DispatcherProvider
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.PopularRates
 import com.mahmoudalim.data.pref.AppPreferences
-import com.mahmoudalim.data.repo.CurrencyRepository
+import com.mahmoudalim.data.usecase.CurrencyUseCases
 import com.mahmoudalim.data.utils.RateFromCurrencyParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,7 +25,7 @@ import kotlin.math.round
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val repo: CurrencyRepository,
+    private val useCases: CurrencyUseCases,
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
 
@@ -37,7 +36,7 @@ class DetailsViewModel @Inject constructor(
 
     fun fetchHistoryFromDatabase() {
         viewModelScope.launch(dispatchers.io) {
-            historyList = repo.fetchConversionsHistoryList()
+            historyList = useCases.fetchConversionsHistoryUseCase()
         }
     }
 
