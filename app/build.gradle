@@ -14,6 +14,7 @@ android {
         targetSdk ProjectConfig.targetSdk
         versionCode ProjectConfig.versionCode
         versionName ProjectConfig.versionName
+        buildConfigField("String" , "API_KEY" , API_KEY)
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

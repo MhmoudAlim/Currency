@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoudalim.core.date.AppDate
 import com.mahmoudalim.core.utils.*
-import com.mahmoudalim.core.utils.Const.API_KEY
 import com.mahmoudalim.core.utils.Const.ROUND_VALUE
+import com.mahmoudalim.currency.BuildConfig
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
@@ -52,7 +52,7 @@ class ConverterViewModel @Inject constructor(
 
 
     private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
-        when (val response = useCases.getAllRatesUseCase("EUR", API_KEY)) {
+        when (val response = useCases.getAllRatesUseCase("EUR", BuildConfig.API_KEY)) {
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
                 if (rates == null) {
