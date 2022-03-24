@@ -11,8 +11,8 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.mahmoudalim.core.utils.CurrencyEvent
+import com.mahmoudalim.core.utils.hideKeyboard
 import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
 import com.mahmoudalim.data.models.SpinnerItem
@@ -43,6 +43,7 @@ class ConverterFragment : Fragment() {
         handleOnAmountChanged()
 
         binding.btnSwap.setOnClickListener {
+            it.hideKeyboard()
             handleOnSwapSpinnerValues()
         }
 
@@ -126,6 +127,7 @@ class ConverterFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
+                parent?.rootView?.hideKeyboard()
                 viewModel.selectedToCurrency.value = SpinnerItem(
                     position = position,
                     value = parent?.selectedItem.toString()
@@ -144,6 +146,7 @@ class ConverterFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
+                    parent?.rootView?.hideKeyboard()
                     viewModel.selectedFromCurrency.value = SpinnerItem(
                         position = position,
                         value = parent?.selectedItem.toString()

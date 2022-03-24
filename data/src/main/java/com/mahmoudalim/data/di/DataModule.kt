@@ -10,14 +10,14 @@ import com.mahmoudalim.data.api.CurrencyApi
 import com.mahmoudalim.data.database.CurrencyDatabase
 import com.mahmoudalim.data.database.HistoryDao
 import com.mahmoudalim.data.datasource.local.CurrencyLocalDataSrc
-import com.mahmoudalim.data.repo.CurrencyRepository
-import com.mahmoudalim.data.repo.DefaultCurrencyRepo
 import com.mahmoudalim.data.datasource.local.DefaultCurrencyLocalDataSrc
 import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
 import com.mahmoudalim.data.datasource.remote.DefaultCurrencyRemoteDataSrc
-import com.mahmoudalim.data.pref.DefaultAppPreferences
 import com.mahmoudalim.data.pref.AppPreferences
 import com.mahmoudalim.data.pref.AppPreferences.Companion.PREF_TAG
+import com.mahmoudalim.data.pref.DefaultAppPreferences
+import com.mahmoudalim.data.repo.CurrencyRepository
+import com.mahmoudalim.data.repo.DefaultCurrencyRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
