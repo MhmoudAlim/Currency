@@ -6,6 +6,6 @@ package com.mahmoudalim.core.utils
 
 sealed class CurrencyEvent {
     class Success(val resultText: String) : CurrencyEvent()
-    class Failure(val errorText: String) : CurrencyEvent()
+    object Failure : CurrencyEvent()
     object Idle : CurrencyEvent()
 }
