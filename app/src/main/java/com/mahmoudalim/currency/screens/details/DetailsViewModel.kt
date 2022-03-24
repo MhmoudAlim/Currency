@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoudalim.core.date.AppDate
+import com.mahmoudalim.core.utils.Const.ROUND_VALUE
 import com.mahmoudalim.core.utils.DispatcherProvider
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.PopularRates
@@ -57,7 +58,7 @@ class DetailsViewModel @Inject constructor(
         toCurrency: String,
     ): Double {
         val final = calculateRatesRatioToBase(fromCurrency, toCurrency)
-        return round(final * 100) / 100
+        return round(final * ROUND_VALUE) / ROUND_VALUE
     }
 
 

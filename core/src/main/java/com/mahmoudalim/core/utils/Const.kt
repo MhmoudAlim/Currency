@@ -11,4 +11,6 @@ object Const {
     const val HISTORY_TABLE = "history_table"
     const val DATABASE_NAME = "currency_db"
 
+    const val BASE = "base"
+    const val ROUND_VALUE = 100
 }

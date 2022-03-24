@@ -7,8 +7,8 @@ enum class PopularRates(val value: String) {
     GGP("GGP"),
     EGP("EGP"),
     SAR("SAR"),
-    BTC("BTC"),
-    RSD("RSD"),
+    BTC("KWD"),
+    RSD("CAD"),
     CUC("CUC"),
     QAR("QAR");
 

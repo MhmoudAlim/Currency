@@ -14,12 +14,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.mahmoudalim.core.utils.Const.BASE
+import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,7 +73,7 @@ class DetailsFragment : Fragment() {
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Last 3 days Historical list", textAlign = Center)
+            Text(text = stringResource(R.string.last_three_days), textAlign = Center)
             viewModel.lastThreeDays().forEach { day ->
                 Card(
                     modifier = Modifier
@@ -103,12 +106,15 @@ class DetailsFragment : Fragment() {
         }
     }
 
-
     @Composable
     private fun PopularCurrenciesListView() {
-        val base = arguments?.getString("base")
-        val popularConversionsList = viewModel.generateList(base ?: "AED")
-        Text(text = "Popular Currencies", textAlign = Center, modifier = Modifier.fillMaxWidth())
+        val base = arguments?.getString(BASE) ?: return
+        val popularConversionsList = viewModel.generateList(base)
+        Text(
+            text = stringResource(R.string.pouplar_curr),
+            textAlign = Center,
+            modifier = Modifier.fillMaxWidth()
+        )
         Card(
             modifier = Modifier
                 .fillMaxSize()

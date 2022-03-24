@@ -3,11 +3,9 @@ package com.mahmoudalim.currency.screens.converter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoudalim.core.date.AppDate
-import com.mahmoudalim.core.utils.AppResponse
+import com.mahmoudalim.core.utils.*
 import com.mahmoudalim.core.utils.Const.API_KEY
-import com.mahmoudalim.core.utils.CurrencyEvent
-import com.mahmoudalim.core.utils.DispatcherProvider
-import com.mahmoudalim.core.utils.UiEvent
+import com.mahmoudalim.core.utils.Const.ROUND_VALUE
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
@@ -83,7 +81,7 @@ class ConverterViewModel @Inject constructor(
 
         val final = calculateRatesRatioToBase(fromCurrency, toCurrency, fromAmount)
 
-        val convertedCurrency = round(final * 100) / 100
+        val convertedCurrency = round(final * ROUND_VALUE) / ROUND_VALUE
         _conversion.value = CurrencyEvent.Success("$convertedCurrency")
 
         if (saveConversion)
