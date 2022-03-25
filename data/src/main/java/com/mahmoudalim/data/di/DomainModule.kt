@@ -17,7 +17,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class DomainModule {
+object DomainModule {
 
     @ViewModelScoped
     @Provides
