@@ -112,7 +112,7 @@ class DetailsFragment : Fragment() {
 //            viewModel.populateCurrenciesList(base)
 //            value = viewModel.popularCurrenciesList }
         LaunchedEffect(key1 = true) {
-            viewModel.popularCurrenciesList
+            viewModel.populateCurrenciesList(base)
         }
 
         Text(
