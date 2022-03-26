@@ -22,14 +22,14 @@ class DefaultCurrencyRemoteDataSrc @Inject constructor(
             if (response.isSuccessful && result != null && result.success) {
                 AppResponse.Success(result)
             } else {
-                AppResponse.ServerError(result?.error?.info ?: "Aa error occurred")
+                AppResponse.ServerError(result?.error?.info ?: "error occurred")
             }
 
         } catch (e: HttpException) {
-            AppResponse.ServerError(e.message ?: "Aa error occurred")
+            AppResponse.ServerError(e.message ?: "error occurred")
 
         } catch (e: IOException) {
-            AppResponse.NetworkError(e.message ?: "Aa error occurred")
+            AppResponse.NetworkError(e.message ?: "error occurred")
         }
     }
 }

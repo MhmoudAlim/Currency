@@ -1,7 +1,6 @@
 package com.mahmoudalim.currency.screens.converter
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -104,6 +104,7 @@ class ConverterFragment : Fragment() {
 
     private fun handleOnAmountChanged() {
         binding.etAmount.doAfterTextChanged {
+            if (it.isNullOrEmpty()) return@doAfterTextChanged
             if (validateDifferentSpinnerValues()) return@doAfterTextChanged
             viewModel.convertCurrency(amount = binding.etAmount.text.toString())
         }

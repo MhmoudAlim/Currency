@@ -4,22 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoudalim.core.date.AppDate
 import com.mahmoudalim.core.utils.*
-import com.mahmoudalim.core.utils.Const.ROUND_VALUE
 import com.mahmoudalim.currency.BuildConfig
+import com.mahmoudalim.currency.shared.CurrencyCalculator
 import com.mahmoudalim.data.database.HistoryEntity
 import com.mahmoudalim.data.models.Ratings
 import com.mahmoudalim.data.models.SpinnerItem
 import com.mahmoudalim.data.pref.AppPreferences
 import com.mahmoudalim.data.usecase.CurrencyUseCases
 import com.mahmoudalim.data.utils.CurrencyItemMapper
-import com.mahmoudalim.data.utils.RateFromCurrencyParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import kotlin.math.round
 
 
 /**
@@ -50,6 +48,7 @@ class ConverterViewModel @Inject constructor(
 
     private val _allRates = MutableStateFlow<Ratings?>(null)
 
+    private val currencyCalculator by lazy { CurrencyCalculator(_allRates) }
 
     private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
         when (val response = useCases.getAllRatesUseCase("EUR", BuildConfig.API_KEY)) {
@@ -76,48 +75,26 @@ class ConverterViewModel @Inject constructor(
         toCurrency: String = selectedToCurrency.value.value,
         saveConversion: Boolean = true
     ) {
-        val fromAmount = amount.toDoubleOrNull()
-        if (validateInput(fromAmount)) return
-
-        val final = calculateRatesRatioToBase(fromCurrency, toCurrency, fromAmount)
-
-        val convertedCurrency = round(final * ROUND_VALUE) / ROUND_VALUE
-        _conversion.value = CurrencyEvent.Success("$convertedCurrency")
-
-        if (saveConversion)
-            insertConversionToDatabase(fromCurrency, toCurrency, amount, convertedCurrency)
-    }
-
-
-    private fun calculateRatesRatioToBase(
-        fromCurrency: String,
-        toCurrency: String,
-        fromAmount: Double?
-    ): Double {
-
-        val fromCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(fromCurrency)
-        val toCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(toCurrency)
-
-        val conversionValue = fromCurrencyRatioToBase / toCurrencyRatioToBase
-
-        return conversionValue * fromAmount!!
-    }
-
-    private fun rateFromCurrencyParser(currency: String): Double {
         if (_allRates.value == null)
             _allRates.value = appPreferences.loadURates()
 
-        val rate = RateFromCurrencyParser(currency, _allRates.value!!)
-        if (rate == null) {
-            _uiEvent.value = UiEvent.ShowToast("Parsing error")
-            return 0.0
+        val convertedvalue = currencyCalculator(amount, fromCurrency, toCurrency)
+
+        when (convertedvalue) {
+            is CurrencyEvent.Idle -> Unit
+            is CurrencyEvent.Failure -> _uiEvent.value = UiEvent.ShowToast("Conversion error")
+            is CurrencyEvent.Success -> {
+                _conversion.value = convertedvalue
+                if (saveConversion)
+                    insertConversionToDatabase(
+                        fromCurrency,
+                        toCurrency,
+                        amount,
+                        convertedvalue.resultText.toDouble()
+                    )
+            }
         }
-        return rate
     }
-
-
-    private fun validateInput(fromAmount: Double?): Boolean = fromAmount == null
-
 
     private fun insertConversionToDatabase(
         fromCurrency: String,
