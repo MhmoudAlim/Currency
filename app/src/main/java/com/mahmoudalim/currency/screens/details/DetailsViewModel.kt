@@ -1,6 +1,7 @@
 package com.mahmoudalim.currency.screens.details
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -26,12 +27,16 @@ class DetailsViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
-    @Inject lateinit var appPreferences: AppPreferences
-    @Inject lateinit var appDate: AppDate
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var appDate: AppDate
 
     var historyList by mutableStateOf(listOf<HistoryEntity>())
 
     var popularCurrenciesList by mutableStateOf(listOf<Pair<String, Double>>())
+
 
     fun fetchHistoryFromDatabase() {
         viewModelScope.launch(dispatcher.io) {
@@ -46,4 +51,11 @@ class DetailsViewModel @Inject constructor(
         popularCurrenciesList = CurrencyPopularList(allRates).populateList(base)
     }
 
+    fun lastThreeDaysChartList(): MutableList<Pair<String, Int>> {
+        val list = mutableListOf<Pair<String, Int>>()
+        lastThreeDays().forEach { day ->
+            list.add(Pair(day, historyList.filter { it.date == day }.size))
+        }
+        return list
+    }
 }
