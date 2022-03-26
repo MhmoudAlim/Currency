@@ -99,18 +99,6 @@ object DataModule {
     @Singleton
     fun provideHistoryDao(dataBase: CurrencyDatabase): HistoryDao = dataBase.historyDao()
 
-    @Provides
-    @Singleton
-    fun provideSharedPreferences(
-        app: Application
-    ): SharedPreferences {
-        return app.getSharedPreferences(PREF_TAG, Context.MODE_PRIVATE)
-    }
 
-    @Provides
-    @Singleton
-    fun provideAppPreferences(sharedPreferences: SharedPreferences): AppPreferences {
-        return DefaultAppPreferences(sharedPreferences)
-    }
 
 }

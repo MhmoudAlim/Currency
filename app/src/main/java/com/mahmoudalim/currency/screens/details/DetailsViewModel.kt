@@ -26,8 +26,8 @@ class DetailsViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
-    @Inject
-    lateinit var appPreferences: AppPreferences
+    @Inject lateinit var appPreferences: AppPreferences
+    @Inject lateinit var appDate: AppDate
 
     var historyList by mutableStateOf(listOf<HistoryEntity>())
 
@@ -39,7 +39,7 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun lastThreeDays() = AppDate.pastDaysOf(3)
+    fun lastThreeDays() = appDate.pastDaysOf(3)
 
     fun populateCurrenciesList(base: String) {
         val allRates = appPreferences.loadURates()

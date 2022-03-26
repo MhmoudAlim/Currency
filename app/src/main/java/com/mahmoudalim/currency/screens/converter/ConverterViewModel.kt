@@ -30,8 +30,9 @@ class ConverterViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
-    @Inject
-    lateinit var appPreferences: AppPreferences
+    @Inject lateinit var appPreferences: AppPreferences
+    @Inject lateinit var appDate: AppDate
+
 
     init {
         fetchRates()
@@ -109,7 +110,7 @@ class ConverterViewModel @Inject constructor(
                     toCurrency = toCurrency,
                     amount = amount,
                     result = convertedCurrency.toString(),
-                    date = AppDate.format(),
+                    date = appDate.format(),
                 )
             )
         }
