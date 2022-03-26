@@ -111,13 +111,9 @@ class DetailsFragment : Fragment() {
 
     @Composable
     private fun PopularCurrenciesListView(base: String) {
-//        val list = produceState(initialValue = viewModel.popularCurrenciesList){
-//            viewModel.populateCurrenciesList(base)
-//            value = viewModel.popularCurrenciesList }
         LaunchedEffect(key1 = true) {
             viewModel.populateCurrenciesList(base)
         }
-
         Text(
             text = stringResource(R.string.pouplar_curr),
             textAlign = Center,

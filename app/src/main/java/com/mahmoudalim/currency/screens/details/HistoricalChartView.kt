@@ -1,5 +1,6 @@
 package com.mahmoudalim.currency.screens.details
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.FloatTweenSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
  */
 
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun HistoricalChartView(days: MutableList<Pair<String, Int>>) {
     var start by remember { mutableStateOf(false) }
@@ -24,6 +26,10 @@ fun HistoricalChartView(days: MutableList<Pair<String, Int>>) {
         targetValue = if (start) 1f else 0f,
         animationSpec = FloatTweenSpec(duration = 2000)
     )
+    var preHeightValue by remember { mutableStateOf(preHeight) }
+    LaunchedEffect(key1 = preHeightValue) {
+        preHeightValue = if (start) 1f else 0f
+    }
     Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.Start,
