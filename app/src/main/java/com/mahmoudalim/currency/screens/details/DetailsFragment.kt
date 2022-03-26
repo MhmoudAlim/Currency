@@ -24,6 +24,8 @@ import androidx.fragment.app.viewModels
 import com.mahmoudalim.core.utils.Const.BASE
 import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentDetailsBinding
+import com.mahmoudalim.currency.shared.WindowInfo
+import com.mahmoudalim.currency.shared.rememberWindowInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,28 +45,50 @@ class DetailsFragment : Fragment() {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    HistoricalChartView(viewModel.lastThreeDaysChartList())
-                    Row() {
-                        Column(
-                            modifier = Modifier
-                                .weight(.6f)
-                                .fillMaxHeight()
-                        ) {
-                            HistoricalListView()
-                        }
-                        Column(
-                            modifier = Modifier
-                                .weight(.4f)
-                                .fillMaxHeight()
-                        ) {
-                            PopularCurrenciesListView(arguments?.getString(BASE) ?: return@Row)
-                        }
-                    }
+                val windowInfo = rememberWindowInfo()
+                when (windowInfo.screenWidthInfo) {
+                    WindowInfo.WindowType.Compact -> ScaffoldCompactView()
+                    WindowInfo.WindowType.Expanded -> ScaffoldExpandedView()
                 }
             }
         }
         return rootView
+    }
+
+    @Composable
+    private fun ScaffoldExpandedView() {
+        Row(modifier = Modifier.fillMaxSize()) {
+            Column(Modifier.weight(.6f)) {
+                HistoricalChartView(viewModel.lastThreeDaysChartList())
+                PopularCurrenciesListView(arguments?.getString(BASE) ?: return)
+            }
+            Column(Modifier.weight(.4f)) {
+                HistoricalListView()
+            }
+        }
+    }
+
+    @Composable
+    private fun ScaffoldCompactView() {
+        Column(modifier = Modifier.fillMaxSize()) {
+            HistoricalChartView(viewModel.lastThreeDaysChartList())
+            Row() {
+                Column(
+                    modifier = Modifier
+                        .weight(.6f)
+                        .fillMaxHeight()
+                ) {
+                    HistoricalListView()
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(.4f)
+                        .fillMaxHeight()
+                ) {
+                    PopularCurrenciesListView(arguments?.getString(BASE) ?: return@Row)
+                }
+            }
+        }
     }
 
     @Composable
@@ -99,8 +123,7 @@ class DetailsFragment : Fragment() {
                 textAlign = Center
             )
             LazyColumn(
-                Modifier.padding(4.dp), contentPadding = PaddingValues
-                    (vertical = 4.dp)
+                Modifier.padding(4.dp)
             ) {
                 items(viewModel.historyList) { item ->
                     HistoryListItemView(item, day)
