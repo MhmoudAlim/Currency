@@ -108,6 +108,10 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 <br/>
 
+![gif](https://github.com/MhmoudAlim/Currency/blob/master/blob/gif.gif?raw=true)
+
+
+
 ---------
 
 ### Demo
