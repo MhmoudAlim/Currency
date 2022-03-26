@@ -6,17 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoudalim.core.date.AppDate
-import com.mahmoudalim.core.utils.Const.ROUND_VALUE
 import com.mahmoudalim.core.utils.DispatcherProvider
+import com.mahmoudalim.currency.shared.CurrencyPopularList
 import com.mahmoudalim.data.database.HistoryEntity
-import com.mahmoudalim.data.models.PopularRates
 import com.mahmoudalim.data.pref.AppPreferences
 import com.mahmoudalim.data.usecase.CurrencyUseCases
-import com.mahmoudalim.data.utils.RateFromCurrencyParser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.round
 
 
 /**
@@ -34,6 +31,8 @@ class DetailsViewModel @Inject constructor(
 
     var historyList by mutableStateOf(listOf<HistoryEntity>())
 
+    var popularCurrenciesList by mutableStateOf(listOf<Pair<String, Double>>())
+
     fun fetchHistoryFromDatabase() {
         viewModelScope.launch(dispatcher.io) {
             historyList = useCases.fetchConversionsHistoryUseCase()
@@ -42,36 +41,9 @@ class DetailsViewModel @Inject constructor(
 
     fun lastThreeDays() = AppDate.pastDaysOf(3)
 
-    fun generateList(base: String): MutableList<Pair<String, Double>> {
-        val list = mutableListOf<Pair<String, Double>>()
-        val currencyList = PopularRates.values()
-        currencyList.forEach {
-            val item = convertCurrency(fromCurrency = base, toCurrency = it.value)
-            list.add(Pair(it.value, item))
-        }
-        return list
-    }
-
-    private fun convertCurrency(
-        fromCurrency: String,
-        toCurrency: String,
-    ): Double {
-        val final = calculateRatesRatioToBase(fromCurrency, toCurrency)
-        return round(final * ROUND_VALUE) / ROUND_VALUE
-    }
-
-
-    private fun calculateRatesRatioToBase(
-        fromCurrency: String,
-        toCurrency: String,
-    ): Double {
-        val fromCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(fromCurrency)
-        val toCurrencyRatioToBase = 1.0 / rateFromCurrencyParser(toCurrency)
-        return fromCurrencyRatioToBase / toCurrencyRatioToBase
-    }
-
-    private fun rateFromCurrencyParser(currency: String): Double {
-        return RateFromCurrencyParser(currency, appPreferences.loadURates()) ?: return 0.0
+    fun populateCurrenciesList(base: String) {
+        val allRates = appPreferences.loadURates()
+        popularCurrenciesList = CurrencyPopularList(allRates).populateList(base)
     }
 
 }
