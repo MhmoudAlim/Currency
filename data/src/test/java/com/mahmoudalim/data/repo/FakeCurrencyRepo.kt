@@ -12,7 +12,7 @@ class FakeCurrencyRepo : CurrencyRepository {
 
     private val historyList = mutableListOf<HistoryEntity>()
 
-    override suspend fun getRates(base: String, key: String): AppResponse<CurrencyResponse> {
+    override suspend fun getRates( key: String): AppResponse<CurrencyResponse> {
         TODO("Not yet implemented")
     }
 

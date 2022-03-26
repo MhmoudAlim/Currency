@@ -8,6 +8,6 @@ import com.mahmoudalim.data.models.CurrencyResponse
  */
 interface CurrencyRemoteDataSrc {
 
-    suspend fun getRates(base: String, accessKey: String): AppResponse<CurrencyResponse>
+    suspend fun getRates(accessKey: String): AppResponse<CurrencyResponse>
 
 }

@@ -14,10 +14,10 @@ class DefaultCurrencyRemoteDataSrc @Inject constructor(
     private val api: CurrencyApi
 ) : CurrencyRemoteDataSrc {
 
-    override suspend fun getRates(base: String, accessKey: String): AppResponse<CurrencyResponse> {
+    override suspend fun getRates(accessKey: String): AppResponse<CurrencyResponse> {
         //TODO: make app response reusable
         return try {
-            val response = api.getRates(base = base, access_key = accessKey)
+            val response = api.getRates(access_key = accessKey)
             val result = response.body()
             if (response.isSuccessful && result != null && result.success) {
                 AppResponse.Success(result)

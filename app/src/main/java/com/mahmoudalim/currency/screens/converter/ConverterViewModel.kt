@@ -30,8 +30,10 @@ class ConverterViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
-    @Inject lateinit var appPreferences: AppPreferences
-    @Inject lateinit var appDate: AppDate
+    @Inject
+    lateinit var appPreferences: AppPreferences
+    @Inject
+    lateinit var appDate: AppDate
 
 
     init {
@@ -52,7 +54,7 @@ class ConverterViewModel @Inject constructor(
     private val currencyCalculator by lazy { CurrencyCalculator(_allRates) }
 
     private fun fetchRates() = viewModelScope.launch(dispatcher.io) {
-        when (val response = useCases.getAllRatesUseCase("EUR", BuildConfig.API_KEY)) {
+        when (val response = useCases.getAllRatesUseCase(BuildConfig.API_KEY)) {
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
                 if (rates == null) {

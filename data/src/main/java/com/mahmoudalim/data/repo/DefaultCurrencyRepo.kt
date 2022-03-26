@@ -2,10 +2,9 @@ package com.mahmoudalim.data.repo
 
 import com.mahmoudalim.core.utils.AppResponse
 import com.mahmoudalim.data.database.HistoryEntity
-import com.mahmoudalim.data.models.CurrencyResponse
 import com.mahmoudalim.data.datasource.local.CurrencyLocalDataSrc
 import com.mahmoudalim.data.datasource.remote.CurrencyRemoteDataSrc
-import kotlinx.coroutines.flow.Flow
+import com.mahmoudalim.data.models.CurrencyResponse
 import javax.inject.Inject
 
 /**
@@ -16,9 +15,9 @@ class DefaultCurrencyRepo @Inject constructor(
     private val localDataSrc: CurrencyLocalDataSrc
 ) : CurrencyRepository {
 
-    override suspend fun getRates(base: String, key: String):
+    override suspend fun getRates(key: String):
             AppResponse<CurrencyResponse> {
-        return remoteDataSrc.getRates(base, key)
+        return remoteDataSrc.getRates(key)
     }
 
     override suspend fun fetchConversionsHistoryList(): List<HistoryEntity> {

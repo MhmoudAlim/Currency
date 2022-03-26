@@ -12,8 +12,8 @@ class GetAllRatesUseCase @Inject constructor(
     private val repository: CurrencyRepository
 ) {
 
-    suspend operator fun invoke(base: String, key: String):
+    suspend operator fun invoke(key: String):
             AppResponse<CurrencyResponse> {
-        return repository.getRates(base, key)
+        return repository.getRates(key)
     }
 }
