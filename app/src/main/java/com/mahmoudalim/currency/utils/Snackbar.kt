@@ -12,7 +12,7 @@ import com.mahmoudalim.currency.R
  */
 
 
-fun snackBar(
+fun showSnackBar(
     view: View,
     @SuppressLint("ResourceAsColor") @ColorInt textColor: Int =  R.color.white,
     @SuppressLint("ResourceAsColor") @ColorInt bgColor: Int = R.color.purple_700,

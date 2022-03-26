@@ -17,7 +17,7 @@ import com.mahmoudalim.core.utils.UiEvent
 import com.mahmoudalim.core.utils.hideKeyboard
 import com.mahmoudalim.currency.R
 import com.mahmoudalim.currency.databinding.FragmentConverterBinding
-import com.mahmoudalim.currency.utils.snackBar
+import com.mahmoudalim.currency.utils.showSnackBar
 import com.mahmoudalim.data.models.SpinnerItem
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,7 +66,7 @@ class ConverterFragment : Fragment() {
             viewModel.uiEvent.collect {
                 when (it) {
                     is UiEvent.Idle -> Unit
-                    is UiEvent.ShowSnackBar -> snackBar(
+                    is UiEvent.ShowSnackBar -> showSnackBar(
                         view = binding.root,
                         message = it.message
                     )
