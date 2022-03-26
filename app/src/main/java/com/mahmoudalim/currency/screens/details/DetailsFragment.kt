@@ -43,20 +43,23 @@ class DetailsFragment : Fragment() {
         binding.composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                Row(modifier = Modifier.fillMaxSize()) {
-                    Column(
-                        modifier = Modifier
-                            .weight(.6f)
-                            .fillMaxHeight()
-                    ) {
-                        HistoricalListView()
-                    }
-                    Column(
-                        modifier = Modifier
-                            .weight(.4f)
-                            .fillMaxHeight()
-                    ) {
-                        PopularCurrenciesListView(arguments?.getString(BASE) ?: return@Row)
+                Column(modifier = Modifier.fillMaxSize()) {
+                    HistoricalChartView(viewModel.lastThreeDaysChartList())
+                    Row() {
+                        Column(
+                            modifier = Modifier
+                                .weight(.6f)
+                                .fillMaxHeight()
+                        ) {
+                            HistoricalListView()
+                        }
+                        Column(
+                            modifier = Modifier
+                                .weight(.4f)
+                                .fillMaxHeight()
+                        ) {
+                            PopularCurrenciesListView(arguments?.getString(BASE) ?: return@Row)
+                        }
                     }
                 }
             }
