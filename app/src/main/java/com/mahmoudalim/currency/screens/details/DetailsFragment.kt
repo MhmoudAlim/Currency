@@ -56,7 +56,7 @@ class DetailsFragment : Fragment() {
                             .weight(.4f)
                             .fillMaxHeight()
                     ) {
-                        PopularCurrenciesListView()
+                        PopularCurrenciesListView(arguments?.getString(BASE) ?: return@Row)
                     }
                 }
             }
@@ -107,9 +107,14 @@ class DetailsFragment : Fragment() {
     }
 
     @Composable
-    private fun PopularCurrenciesListView() {
-        val base = arguments?.getString(BASE) ?: return
-        val popularConversionsList = viewModel.generateList(base)
+    private fun PopularCurrenciesListView(base: String) {
+//        val list = produceState(initialValue = viewModel.popularCurrenciesList){
+//            viewModel.populateCurrenciesList(base)
+//            value = viewModel.popularCurrenciesList }
+        LaunchedEffect(key1 = true) {
+            viewModel.popularCurrenciesList
+        }
+
         Text(
             text = stringResource(R.string.pouplar_curr),
             textAlign = Center,
@@ -124,7 +129,7 @@ class DetailsFragment : Fragment() {
                 Modifier.padding(4.dp), contentPadding = PaddingValues
                     (vertical = 8.dp)
             ) {
-                items(popularConversionsList) { item ->
+                items(viewModel.popularCurrenciesList) { item ->
                     PopularListItemView(base, item)
                 }
             }
