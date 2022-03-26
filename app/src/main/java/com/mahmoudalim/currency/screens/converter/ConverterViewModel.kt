@@ -27,7 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ConverterViewModel @Inject constructor(
     private val useCases: CurrencyUseCases,
-    private val dispatchers: DispatcherProvider
+    private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
     @Inject
@@ -50,7 +50,7 @@ class ConverterViewModel @Inject constructor(
 
     private val currencyCalculator by lazy { CurrencyCalculator(_allRates) }
 
-    private fun fetchRates() = viewModelScope.launch(dispatchers.io) {
+    private fun fetchRates() = viewModelScope.launch(dispatcher.io) {
         when (val response = useCases.getAllRatesUseCase("EUR", BuildConfig.API_KEY)) {
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
@@ -102,7 +102,7 @@ class ConverterViewModel @Inject constructor(
         amount: String,
         convertedCurrency: Double
     ) {
-        viewModelScope.launch(dispatchers.io) {
+        viewModelScope.launch(dispatcher.io) {
             useCases.insertConversionRecordUseCase(
                 HistoryEntity(
                     fromCurrency = fromCurrency,

@@ -26,7 +26,7 @@ import kotlin.math.round
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val useCases: CurrencyUseCases,
-    private val dispatchers: DispatcherProvider
+    private val dispatcher: DispatcherProvider
 ) : ViewModel() {
 
     @Inject
@@ -35,7 +35,7 @@ class DetailsViewModel @Inject constructor(
     var historyList by mutableStateOf(listOf<HistoryEntity>())
 
     fun fetchHistoryFromDatabase() {
-        viewModelScope.launch(dispatchers.io) {
+        viewModelScope.launch(dispatcher.io) {
             historyList = useCases.fetchConversionsHistoryUseCase()
         }
     }
