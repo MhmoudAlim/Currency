@@ -1,10 +1,10 @@
-## Currency
+### Currency
 
 Currency is a proof-of-concept Android app designed to help customers to hand different currency conversions.
 
 ---------
 
-# Table of contents
+## Table of contents
 
 - [Features](#features)
 - [Implementation Details](#implementation-details--technologies-used)
@@ -58,14 +58,13 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 ---------
 
-###Api
+### Api
 
 - [Fixer Api](http://data.fixer.io/api/)
 
 ---------
 
-# Why Modular Architecture ?
-
+### Why Modular Architecture ?
 
 ![Alt text](https://github.com/MhmoudAlim/Currency/blob/master/blob/modules.png?raw=true)
 
@@ -84,7 +83,7 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 ---------
 
-##App Modules
+### App Modules
 
 - _App_ :  contains views, state holders - represent presentation Logic (UI) Layer.
 - _Data_ :  contains data, repos , use-cases, database - represent business logic (domain-data) Layers.
@@ -95,15 +94,13 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 ---------
 
-##App Architecture
-
+### App Architecture
 
 ![Alt text](https://github.com/MhmoudAlim/Currency/blob/master/blob/architecture.png?raw=true)
 
-
 ---------
 
-## Preview
+### Preview
 
 1            |  2
 :-------------------------:|:-------------------------:
@@ -113,20 +110,20 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 ---------
 
-## Demo
+### Demo
 
 Download App sample : [Currency](https://github.com/MhmoudAlim/Currency/raw/master/blob/app-release.apk)
 
 ------
 
-## Credits
+### Credits
 
 - [Guide to app architecture](https://developer.android.com/jetpack/guide#recommended-app-arch)
 - [Android Components Architecture in a Modular Word](https://proandroiddev.com/android-components-architecture-in-a-modular-word-7414a0631969)
 
 ------
 
-## License
+### License
 
 <details>
     <summary>
