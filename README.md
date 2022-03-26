@@ -1,6 +1,6 @@
 ## Currency
 
-###Currency is a proof-of-concept Android app designed to help customers to hand different currency conversions.
+Currency is a proof-of-concept Android app designed to help customers to hand different currency conversions.
 
 ---------
 
@@ -59,6 +59,7 @@
 ---------
 
 ###Api
+
 - [Fixer Api](http://data.fixer.io/api/)
 
 ---------
@@ -82,6 +83,7 @@
 <br/>
 
 ---------
+
 ##App Modules
 
 - _App_ :  contains views, state holders - represent presentation Logic (UI) Layer.
@@ -92,6 +94,7 @@
 <br/>
 
 ---------
+
 ##App Architecture
 
 
@@ -102,7 +105,6 @@
 
 ## Preview
 
-
 1            |  2
 :-------------------------:|:-------------------------:
 ![screenshot](https://github.com/MhmoudAlim/Currency/blob/master/blob/Screenshot_1.jpg?raw=true)  |   ![](https://github.com/MhmoudAlim/Currency/blob/master/blob/Screenshot_2.jpg?raw=true)
@@ -112,17 +114,20 @@
 ---------
 
 ## Demo
+
 Download App sample : [Currency](https://github.com/MhmoudAlim/Currency/raw/master/blob/app-release.apk)
 
 ------
 
 ## Credits
+
 - [Guide to app architecture](https://developer.android.com/jetpack/guide#recommended-app-arch)
 - [Android Components Architecture in a Modular Word](https://proandroiddev.com/android-components-architecture-in-a-modular-word-7414a0631969)
 
 ------
 
 ## License
+
 <details>
     <summary>
         Click to reveal License
