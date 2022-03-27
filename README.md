@@ -108,7 +108,7 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 <br/>
 
-![gif](https://github.com/MhmoudAlim/Currency/blob/master/blob/gif.gif?raw=true)
+![gif](https://raw.githubusercontent.com/MhmoudAlim/Currency/feature/historical_chart/blob/gif.gif)
 
 
 
