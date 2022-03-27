@@ -1,6 +1,7 @@
 ### Currency
 
-Currency is a proof-of-concept Android app designed to help customers to hand different currency conversions.
+Currency is a proof-of-concept Android app designed to help customers to hand different currency
+conversions.
 
 ---------
 
@@ -22,10 +23,10 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 ### Features
 
 - User can convert currencies form different bases to any currency.
-- User can swap between FROM - TO currencies and accordingly converted data
-  changed.
+- User can swap between FROM - TO currencies and accordingly converted data changed.
 - User can view list of his conversion history for the last 3 days (day by day).
-- User can see a list of rates of 10 most popular currencies form his selected base.
+- User can view a chart of conversions historical data in the last 3 days (day by day).
+- User can view a list of rates of 10 most popular currencies form his selected base.
 - User can make any conversion offline mode with the last cached rates fetched from Rest Api.
 
 --------
@@ -52,7 +53,6 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 - Retrofit & OkHttp
 - Gson
 - Java ThreeTen
-
 
 <br/>
 
@@ -86,9 +86,9 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 ### App Modules
 
 - _App_ :  contains views, state holders - represent presentation Logic (UI) Layer.
-- _Data_ :  contains data, repos , use-cases, database - represent business logic (domain-data) Layers.
+- _Data_ :  contains data, repos , use-cases, database - represent business logic (domain-data)
+  Layers.
 - _Core_ :  contains helper classes and shared claes with all modules.
-
 
 <br/>
 
@@ -116,7 +116,8 @@ Currency is a proof-of-concept Android app designed to help customers to hand di
 
 ### Demo
 
-Download App sample : [Currency](https://github.com/MhmoudAlim/Currency/raw/master/blob/app-release.apk)
+Download App
+sample : [Currency](https://github.com/MhmoudAlim/Currency/raw/master/blob/app-release.apk)
 
 ------
 
@@ -147,4 +148,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
 </details>
