@@ -13,8 +13,7 @@ import com.mahmoudalim.data.pref.AppPreferences
 import com.mahmoudalim.data.usecase.CurrencyUseCases
 import com.mahmoudalim.data.utils.CurrencyItemMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -32,6 +31,7 @@ class ConverterViewModel @Inject constructor(
 
     @Inject
     lateinit var appPreferences: AppPreferences
+
     @Inject
     lateinit var appDate: AppDate
 
@@ -46,8 +46,8 @@ class ConverterViewModel @Inject constructor(
     private val _conversion = MutableStateFlow<CurrencyEvent>(CurrencyEvent.Idle)
     val conversion: StateFlow<CurrencyEvent> = _conversion
 
-    private val _uiEvent = MutableStateFlow<UiEvent>(UiEvent.Idle)
-    val uiEvent: StateFlow<UiEvent> = _uiEvent
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
 
     private val _allRates = MutableStateFlow<Ratings?>(null)
 
@@ -58,16 +58,18 @@ class ConverterViewModel @Inject constructor(
             is AppResponse.Success -> {
                 val rates = response.data?.let { CurrencyItemMapper().map(it) }
                 if (rates == null) {
-                    _uiEvent.value = UiEvent.ShowToast("Unexpected error")
+                    _uiEvent.emit(UiEvent.ShowToast("Unexpected error"))
                     return@launch
                 }
                 _allRates.value = rates.rates
                 appPreferences.saveRates(rates.rates)
             }
-            is AppResponse.NetworkError -> _uiEvent.value =
+            is AppResponse.NetworkError -> _uiEvent.emit(
                 UiEvent.ShowSnackBar("Network error: ${response.message!!}")
-            is AppResponse.ServerError -> _uiEvent.value =
+            )
+            is AppResponse.ServerError -> _uiEvent.emit(
                 UiEvent.ShowSnackBar("Server error: ${response.message!!}")
+            )
         }
 
     }
@@ -78,23 +80,26 @@ class ConverterViewModel @Inject constructor(
         toCurrency: String = selectedToCurrency.value.value,
         saveConversion: Boolean = true
     ) {
-        if (_allRates.value == null)
-            _allRates.value = appPreferences.loadURates()
+        viewModelScope.launch(dispatcher.default) {
+            if (_allRates.value == null)
+                _allRates.value = appPreferences.loadURates()
 
-        val convertedvalue = currencyCalculator(amount, fromCurrency, toCurrency)
-
-        when (convertedvalue) {
-            is CurrencyEvent.Idle -> Unit
-            is CurrencyEvent.Failure -> _uiEvent.value = UiEvent.ShowToast("Conversion error")
-            is CurrencyEvent.Success -> {
-                _conversion.value = convertedvalue
-                if (saveConversion)
-                    insertConversionToDatabase(
-                        fromCurrency,
-                        toCurrency,
-                        amount,
-                        convertedvalue.resultText.toDouble()
-                    )
+            when (val convertedValue =
+                currencyCalculator.invoke(amount, fromCurrency, toCurrency)) {
+                is CurrencyEvent.Idle -> Unit
+                is CurrencyEvent.Failure -> {
+                    _uiEvent.emit(UiEvent.ShowToast("Conversion error"))
+                }
+                is CurrencyEvent.Success -> {
+                    _conversion.value = convertedValue
+                    if (saveConversion)
+                        insertConversionToDatabase(
+                            fromCurrency,
+                            toCurrency,
+                            amount,
+                            convertedValue.resultText.toDouble()
+                        )
+                }
             }
         }
     }

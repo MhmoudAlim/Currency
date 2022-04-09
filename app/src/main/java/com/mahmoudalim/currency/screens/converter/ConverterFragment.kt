@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoudalim.core.utils.CurrencyEvent
 import com.mahmoudalim.core.utils.UiEvent
@@ -20,6 +23,8 @@ import com.mahmoudalim.currency.databinding.FragmentConverterBinding
 import com.mahmoudalim.currency.utils.showSnackBar
 import com.mahmoudalim.data.models.SpinnerItem
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ConverterFragment : Fragment() {
@@ -82,16 +87,18 @@ class ConverterFragment : Fragment() {
     }
 
     private fun collectCurrencyEvents() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.conversion.collect {
-                when (it) {
-                    is CurrencyEvent.Success -> {
-                        binding.etResult.setText(it.resultText)
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.conversion.collectLatest {
+                    when (it) {
+                        is CurrencyEvent.Success -> {
+                            binding.etResult.setText(it.resultText)
+                        }
+                        is CurrencyEvent.Failure -> {
+                            binding.etResult.setText("0")
+                        }
+                        is CurrencyEvent.Idle -> Unit
                     }
-                    is CurrencyEvent.Failure -> {
-                        binding.etResult.setText("0")
-                    }
-                    is CurrencyEvent.Idle -> Unit
                 }
             }
         }
